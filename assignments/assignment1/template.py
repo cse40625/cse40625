@@ -56,7 +56,7 @@ class Perceptron(object):
         """
         ### INSERT CODE HERE ####
 
-    def fit(self, X, y, display_step=1):
+    def fit(self, X, y):
         """Fit the perceptron.
 
         Parameters
