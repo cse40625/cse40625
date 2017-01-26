@@ -86,8 +86,8 @@ class Perceptron(object):
         n_instances, n_features = np.shape(X)
 
         # Insert bias term.
-        self.bias = np.negative(np.ones(shape=(n_instances, 1)))
-        X = np.hstack((X, self.bias))
+        bias = np.negative(np.ones(shape=(n_instances, 1)))
+        X = np.hstack((X, bias))
 
         # Initialize weight vector.
         self.weight_ = np.random.rand(n_features + 1)
