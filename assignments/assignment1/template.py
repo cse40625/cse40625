@@ -59,7 +59,7 @@ class Perceptron(object):
 
         Parameters
         ----------
-        X : array, shape = [n_instances, n_features + 1]
+        X : array, shape = [n_instances, n_features]
             Training data.
         y : array, shape = [n_instances, n_targets]
             Target values.
