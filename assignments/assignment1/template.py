@@ -3,12 +3,14 @@ import pandas as pd
 
 np.random.seed(seed=0)
 
+
 def make_dataset():
     digits = load_digits(n_class=2)
     df = pd.DataFrame(np.column_stack((digits.data, digits.target)))
     df = df.rename(columns={64: 'Class'})
     df.ix[df.ix[:, -1] == 0, -1] = -1
     df.to_csv('digits_binary.csv', index=False)
+
 
 def accuracy_score(y_true, y_pred):
     """Accuracy classification score."""
@@ -18,6 +20,7 @@ def accuracy_score(y_true, y_pred):
 
 class Perceptron(object):
     """Perceptron."""
+
     def __init__(self):
         self.weight_ = None
 
