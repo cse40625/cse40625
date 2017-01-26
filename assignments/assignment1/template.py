@@ -8,16 +8,16 @@ def accuracy_score(y_true, y_pred):
     """Accuracy classification score.
 
     Parameters
-        ----------
-        y_true : array, shape = [n_instances]
-            Actual target values.
-        y_pred : array, shape = [n_instances]
-            Predicted target values.
+    ----------
+    y_true : array, shape = [n_instances]
+        Actual target values.
+    y_pred : array, shape = [n_instances]
+        Predicted target values.
 
-        Returns
-        -------
-        score : float
-            Returns the fraction of correctly classified instances.
+    Returns
+    -------
+    score : float
+        Returns the fraction of correctly classified instances.
     """
     score = y_true == y_pred
     return np.average(score)
