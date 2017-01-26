@@ -36,11 +36,11 @@ class Perceptron(object):
         ### INSERT CODE HERE ####
 
     def _decision_function(self, x):
-        """Decides class labels for instances in X.
+        """Decides class labels for instances in x.
 
-        The preedicted class label is computed as:
-            sign(w^T * X)
-        where w is the weight vector and X is the feature vector.
+        The predicted class label is computed as:
+            sign(w^T * x)
+        where w is the weight vector and x is the feature vector.
 
         Parameters
         ----------
