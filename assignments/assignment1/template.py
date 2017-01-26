@@ -5,6 +5,7 @@ np.random.seed(seed=0)
 
 
 def make_dataset():
+    """Make the binary digits dataset."""
     digits = load_digits(n_class=2)
     df = pd.DataFrame(np.column_stack((digits.data, digits.target)))
     df = df.rename(columns={64: 'Class'})
@@ -60,7 +61,7 @@ class Perceptron(object):
         Returns
         -------
         C : int
-            Predicted class label for instance to predict.
+            Predicted class label for instance.
         """
         ### INSERT CODE HERE ####
 
