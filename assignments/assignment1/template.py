@@ -94,7 +94,7 @@ class Perceptron(object):
 
         # Repeatedly iterate through all of the instances from first to last,
         # correcting each misclassified instance until no misclassified
-        # instances remain.
+        # instances remain. Print a line for each corrected instance.
         i = 0
         while True:
             for j in range(n_instances):
