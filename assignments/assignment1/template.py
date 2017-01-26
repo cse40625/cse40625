@@ -36,7 +36,7 @@ class Perceptron(object):
         ### INSERT CODE HERE ####
 
     def _decision_function(self, x):
-        """Decides class labels for instances in x.
+        """Decides class labels for instance.
 
         The predicted class label is computed as:
             sign(w^T * x)
@@ -77,8 +77,8 @@ class Perceptron(object):
         # Initialize weight vector.
         self.weight_ = np.random.rand(n_features + 1)
 
-        # Repeatedly interate through all of the instances from first to last,
-        # correcting each misclassified instance until no misclassified 
+        # Repeatedly iterate through all of the instances from first to last,
+        # correcting each misclassified instance until no misclassified
         # instances remain.
         while True:
             for j in range(n_instances):
