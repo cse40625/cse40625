@@ -32,7 +32,7 @@ class Perceptron(object):
     def _update_weight(self, x, y):
         """Updates the weight vector.
 
-        The new weight w_{k+1} is computed as:
+        The new weight vector w_{k+1} is computed as:
             w_{k+1} = w_k + y * x
         where x is the feature vector and y is the class value.
 
