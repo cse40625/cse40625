@@ -34,7 +34,7 @@ class Perceptron(object):
 
         The new weight vector w_{k+1} is computed as:
             w_{k+1} = w_k + y * x
-        where x is the feature vector and y is the class value.
+        where x is the feature vector and y is the target value.
 
         Parameters
         ----------
@@ -51,9 +51,9 @@ class Perceptron(object):
         ### INSERT CODE HERE ####
 
     def _decision_function(self, x):
-        """Decides class labels for instance.
+        """Decides target value for instance.
 
-        The predicted class label is computed as:
+        The predicted target value is computed as:
             sign(w^T * x)
         where w is the weight vector and x is the feature vector.
 
