@@ -100,6 +100,11 @@ class Perceptron(object):
             for j in range(n_instances):
                 ### INSERT CODE HERE ####
 
+                if acc == 1.0:
+                    return self
+
+        return self
+
 
 with open('output.txt', 'w') as f_out:
     df = pd.read_csv('digits_binary.csv')
