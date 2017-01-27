@@ -24,8 +24,14 @@ def accuracy_score(y_true, y_pred):
 
 
 class Perceptron(object):
-    """Perceptron."""
+    """Perceptron.
 
+    References
+    ----------
+    .. [1] F. Rosenblatt. "The Perceptron: A Probabilistic Model for
+           Information Storage and Organization in the Brain." Psychological
+           Review 65 (6): 386-408, 1958.
+    """
     def __init__(self):
         self.weight_ = None
 
