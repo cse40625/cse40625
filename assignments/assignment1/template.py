@@ -62,7 +62,9 @@ class Perceptron(object):
         self.weight_ : array, shape = [n_features + 1]
             Updated weight vector.
         """
-        ### INSERT CODE HERE ####
+        # ================ YOUR CODE HERE ================
+        # Instructions: Return the updated weight vector.
+        # ================================================
 
     def _decision_function(self, x):
         """Decides target value for instance.
@@ -81,7 +83,9 @@ class Perceptron(object):
         C : int
             Predicted target value for instance.
         """
-        ### INSERT CODE HERE ####
+        # ================ YOUR CODE HERE ================
+        # Instructions: Return the predicted target value.
+        # ================================================
 
     def fit(self, X, y):
         """Fit the perceptron.
@@ -106,13 +110,18 @@ class Perceptron(object):
         # Initialize weight vector.
         self.weight_ = np.random.rand(n_features + 1)
 
-        # Repeatedly iterate through all of the instances from first to last,
-        # correcting each misclassified instance until no misclassified
-        # instances remain. Print a line for each corrected instance.
+        # Repeatedly iterate through all of the instances from first to last.
         i = 0
         while True:
             for j in range(n_instances):
-                ### INSERT CODE HERE ####
+                # ================ YOUR CODE HERE ================
+                # Instructions: Identify a misclassified instance, using it to
+                # update the weight vector. Print a line for each corrected
+                # instance with the number of corrected misclassifiations
+                # (starting from 0), a space, and the current classification 
+                # accuracy to three decimal places. Halt when no misclassified
+                # instances remain.
+                # ================================================
 
                 if acc == 1.0:
                     return self
@@ -122,4 +131,6 @@ class Perceptron(object):
 
 with open('output.txt', 'w') as f_out:
     df = pd.read_csv('digits_binary.csv')
-    ### INSERT CODE HERE ####
+    # ================ YOUR CODE HERE ================
+    # Instructions: Initialize and fit the perceptron.
+    # ================================================
