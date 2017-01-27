@@ -115,12 +115,12 @@ class Perceptron(object):
         while True:
             for j in range(n_instances):
                 # ================ YOUR CODE HERE ================
-                # Instructions: Identify a misclassified instance, using it to
-                # update the weight vector. Print a line for each corrected
-                # instance with the number of corrected misclassifiations
-                # (starting from 0), a space, and the current classification 
-                # accuracy to three decimal places. Halt when no misclassified
-                # instances remain.
+                # Instructions: Identify an instance misclassified by the
+                # decision function, and use it to update the weight vector.
+                # Print a line for each corrected instance with the line number
+                # (starting from 0), a space, and the current fraction of
+                # correctly classified instances to three decimal places. Halt
+                # when all instances are correctly classified.
                 # ================================================
 
                 if acc == 1.0:
