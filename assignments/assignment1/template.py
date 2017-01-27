@@ -26,6 +26,14 @@ def accuracy_score(y_true, y_pred):
 class Perceptron(object):
     """Perceptron.
 
+    The perceptron is a supervised linear classifier that makes predictions by
+    combining the feature vector with a set of weights. In this implementation,
+    the classification threshold is inserted into the weight vector as a
+    negative bias term (i.e., a feature column of -1). The weight vector is
+    initialized with random samples from a uniform distribution over [0, 1).
+    The model is updated only on misclassified instances, using the sign of the
+    dot product of the weight and feature vectors as the target prediction.
+
     References
     ----------
     .. [1] F. Rosenblatt. "The Perceptron: A Probabilistic Model for
