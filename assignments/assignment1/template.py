@@ -66,22 +66,22 @@ class Perceptron(object):
         # Instructions: Return the updated weight vector.
         # ================================================
 
-    def _decision_function(self, x):
-        """Decides target value for instance.
+    def _decision_function(self, X):
+        """Decides target value for instance(s).
 
-        The predicted target value is computed as:
+        The predicted target value for each instance x of X is computed as:
             sign(w.T * x)
         where w is the weight vector and x is the feature vector.
 
         Parameters
         ----------
-        x : array, shape = [n_features + 1]
-            Feature vector for instance to update.
+        X : array, shape = [n_instances, n_features + 1]
+            Feature matrix or vector for instance(s) to update.
 
         Returns
         -------
         C : int
-            Predicted target value for instance.
+            Predicted target value for instance(s).
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Return the predicted target value.
