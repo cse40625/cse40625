@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 
-np.random.seed(seed=0)
-
 
 def accuracy_score(y_true, y_pred):
     """Accuracy classification score.
@@ -34,13 +32,23 @@ class Perceptron(object):
     The model is updated only on misclassified instances, using the sign of the
     dot product of the weight and feature vectors as the target prediction.
 
+    Parameters
+    ----------
+    random_state : int or None, optional (default=None)
+        If int, random_state is the seed used by the random number generator.
+        If None, the random number generator is the RandomState instance used
+        by np.random.
+
     References
     ----------
     .. [1] F. Rosenblatt. "The Perceptron: A Probabilistic Model for
            Information Storage and Organization in the Brain." Psychological
            Review 65 (6): 386-408, 1958.
     """
-    def __init__(self):
+
+    def __init__(self, random_state=0):
+        self.random_state = random_state
+
         self.weight_ = None
 
     def _update_weight(self, x, y):
@@ -95,12 +103,14 @@ class Perceptron(object):
         X : array, shape = [n_instances, n_features]
             Training data.
         y : array, shape = [n_instances, n_targets]
-            Target values.
+            Target values (assumed to be {-1, 1}).
 
         Returns
         -------
         self : returns an instance of self.
         """
+        np.random.seed(seed=self.random_state)
+
         n_instances, n_features = np.shape(X)
 
         # Insert bias term.
