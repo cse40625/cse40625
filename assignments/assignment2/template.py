@@ -127,11 +127,12 @@ class LogisticRegression(object):
         # Instructions: Insert a negative bias term and initialize the weights
         # with random samples from a Normal distribution with zero mean and
         # unit variance. Iterate up to max_iter times. Each iteration, compute
-        # the gradient and use it to update the weight vector. Using the
-        # updated weight vector, apply the decision function to generate the
-        # predicted class probabilities. Use these probabilities to predict the
-        # target class values. Each iteration, print the current accuracy score
-        # each iteration. Halt if no misclassified instances remain.
+        # the gradient and use it to update the weight vector in the direction
+        # of the greatest decrease in error. Using the updated weight vector,
+        # apply the decision function to generate the predicted class
+        # probabilities. Use these probabilities to predict the target class
+        # values. Each iteration, print the current accuracy score each
+        # iteration. Halt if no misclassified instances remain.
         # ================================================
 
     def predict(self, X):
