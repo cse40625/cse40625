@@ -29,11 +29,13 @@ def sigmoid(z):
 class LogisticRegression(object):
     """Logistic Regression (aka logit, MaxEnt) classifier.
 
+    The gradient used to update the weight vector is computed based on [1].
+
     Parameters
     ----------
-    max_iter : int, optional (default=100)
+    max_iter : int, optional (default=500)
         Maximum number of iterations taken for the solver to converge.
-    learning_rate : float, optional (default=0.1)
+    learning_rate : float, optional (default=0.01)
         The learning rate for weight updates.
     random_state : int or None, optional (default=None)
         If int, random_state is the seed used by the random number generator.
