@@ -131,8 +131,8 @@ class LogisticRegression(object):
         # of the greatest decrease in error. Using the updated weight vector,
         # apply the decision function to generate the predicted class
         # probabilities. Use these probabilities to predict the target class
-        # values. Each iteration, print the current accuracy score each
-        # iteration. Halt if no misclassified instances remain.
+        # values. Each iteration, print the current accuracy. Halt if no
+        # misclassified instances remain.
         # ================================================
 
     def predict(self, X):
