@@ -66,7 +66,7 @@ class LogisticRegression(object):
         Logistic regression minimizes cross-entropy error:
             E(w) = 1/N \sum_N ln(1 + exp(y_N * w.T * x_n)),
         which can be minimized by computing the gradient:
-            grad = -1/N \sum_N ((y_n * x_n) / (1 + exp(y_N * w.T * x_n))),
+            grad = -1/N \sum_N ((y_n * x_n) / (1 + exp(y_n * w.T * x_n))),
         where N is the number of instances and w are the weights.
 
         Parameters
@@ -82,7 +82,7 @@ class LogisticRegression(object):
             The gradient of the error.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Return the gradient to use to update weight vector.
+        # Instructions: Return the gradient of the error.
         # ================================================
 
     def _decision_function(self, X):
