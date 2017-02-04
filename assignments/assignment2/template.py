@@ -61,7 +61,7 @@ class LogisticRegression(object):
         self.weight_ = None
 
     def _compute_gradient(self, weights, X, y):
-        """Compute the gradient for the logsitic regression error.
+        """Compute the gradient for the logistic regression error.
 
         Logistic regression minimizes cross-entropy error:
             E(w) = 1/N \sum_N ln(1 + exp(y_N * w.T * x_n)),
@@ -119,7 +119,7 @@ class LogisticRegression(object):
 
         Returns
         -------
-        self : returns an instance of self.
+        self : Returns an instance of self.
         """
         np.random.seed(seed=self.random_state)
 

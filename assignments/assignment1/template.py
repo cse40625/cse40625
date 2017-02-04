@@ -114,7 +114,7 @@ class Perceptron(object):
 
         Returns
         -------
-        self : returns an instance of self.
+        self : Returns an instance of self.
         """
         np.random.seed(seed=self.random_state)
 
