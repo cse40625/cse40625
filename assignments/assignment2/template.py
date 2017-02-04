@@ -40,6 +40,11 @@ class LogisticRegression(object):
         If None, the random number generator is the RandomState instance used
         by np.random.
 
+    Attributes
+    ----------
+    weight_ : array
+        Weight vector.
+
     References
     ----------
     .. [1] Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from

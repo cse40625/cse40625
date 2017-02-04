@@ -39,6 +39,11 @@ class Perceptron(object):
         If None, the random number generator is the RandomState instance used
         by np.random.
 
+    Attributes
+    ----------
+    weight_ : array
+        Weight vector.
+
     References
     ----------
     .. [1] F. Rosenblatt. "The Perceptron: A Probabilistic Model for
