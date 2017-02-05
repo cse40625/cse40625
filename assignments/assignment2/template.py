@@ -129,10 +129,10 @@ class LogisticRegression(object):
         # unit variance. Iterate up to max_iter times. Each iteration, compute
         # the gradient and use it to update the weight vector in the direction
         # of the greatest decrease in error. Using the updated weight vector,
-        # apply the decision function to generate the predicted class
-        # probabilities. Use these probabilities to predict the target class
-        # values. Each iteration, print the current accuracy. Halt if no
-        # misclassified instances remain.
+        # apply the decision function to generate the predicted target class
+        # probabilities, using a threshold on these probabilities to predict
+        # the target class values. Each iteration, print the current model
+        # accuracy. Halt if no misclassified instances remain.
         # ================================================
 
     def predict(self, X):
