@@ -1,6 +1,4 @@
-import numpy as np
 import pandas as pd
-from sklearn.datasets import load_digits
 
 train = 'https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tra'
 test = 'https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optdigits.tes'
