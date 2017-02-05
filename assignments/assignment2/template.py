@@ -78,8 +78,8 @@ class LogisticRegression(object):
 
         Returns
         -------
-        grad : int
-            The gradient of the error.
+        grad : array, shape = [n_weights,]
+            Gradient of the error.
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Return the gradient of the error.
@@ -145,7 +145,7 @@ class LogisticRegression(object):
 
         Returns
         -------
-        y_pred : array, shape = [n_instances]
+        y_pred : array, shape = [n_instances,]
             Predicted target value for instances.
         """
         # ================ YOUR CODE HERE ================
