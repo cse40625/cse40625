@@ -85,6 +85,23 @@ class LogisticRegression(object):
         # Instructions: Return the gradient of the error.
         # ================================================
 
+    def _update_weight(self, grad, error=None):
+        """Updates the weight vector.
+
+        Given the learning rate and gradient of the error, the updated weight
+        vector w can be computed as:
+            w = learning_rate * -grad
+        which adjusts the weight vector in the direction of negative error.
+
+        Parameters
+        ----------
+        grad : array, shape = [n_weights,]
+            Gradient of the error.
+        """
+        # ================ YOUR CODE HERE ================
+        # Instructions: Update the weight vector.
+        # ================================================
+
     def _decision_function(self, X):
         """Decides target value for instance(s).
 

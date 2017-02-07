@@ -71,14 +71,9 @@ class Perceptron(object):
             Feature vector for instance to update.
         y : int
             Target value for instance to update.
-
-        Returns
-        -------
-        self.weight_ : array, shape = [n_features + 1]
-            Updated weight vector.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Return the updated weight vector.
+        # Instructions: Update the weight vector.
         # ================================================
 
     def _decision_function(self, X):
