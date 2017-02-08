@@ -154,7 +154,7 @@ class LogisticRegression(object):
         # ================================================
 
     def predict(self, X):
-        """Predict target values for instances in X.
+        """Predict class labels for instances in X.
 
         Parameters
         ----------
