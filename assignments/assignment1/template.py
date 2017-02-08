@@ -90,7 +90,7 @@ class Perceptron(object):
 
         Returns
         -------
-        C : int
+        C : int or array
             Predicted target value for instance(s).
         """
         # ================ YOUR CODE HERE ================
