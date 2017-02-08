@@ -117,7 +117,7 @@ class LogisticRegression(object):
 
         Returns
         -------
-        P : float
+        P : float or array
             Predicted target value for instance(s).
         """
         # ================ YOUR CODE HERE ================
