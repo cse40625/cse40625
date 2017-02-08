@@ -60,7 +60,7 @@ class LogisticRegression(object):
 
         self.weight_ = None
 
-    def _compute_gradient(self, weights, X, y):
+    def _compute_gradient(self, X, y):
         """Compute the gradient for the logistic regression error.
 
         Logistic regression minimizes cross-entropy error:
@@ -90,8 +90,9 @@ class LogisticRegression(object):
 
         Given the learning rate and gradient of the error, the updated weight
         vector w can be computed as:
-            w = learning_rate * -grad
-        which adjusts the weight vector in the direction of negative error.
+            w_{k+1} = w_k + learning_rate * -grad
+        where k is the iteration. This adjusts the weight vector in the
+        direction of negative error proportional to the learning rate.
 
         Parameters
         ----------
@@ -108,7 +109,7 @@ class LogisticRegression(object):
         The predicted target value for each instance x of X is computed as:
             theta(w.T * x)
         where theta is the logistic function, w is the weight vector, and x is
-        the feature vector.
+        the feature vector or matrix.
 
         Parameters
         ----------
@@ -141,7 +142,7 @@ class LogisticRegression(object):
         np.random.seed(seed=self.random_state)
 
         # ================ YOUR CODE HERE ================
-        # Instructions: Insert a negative bias term and initialize the weights
+        # Instructions: Insert a positive bias term and initialize the weights
         # with random samples from a Normal distribution with zero mean and
         # unit variance. Iterate up to max_iter times. Each iteration, compute
         # the gradient and use it to update the weight vector in the direction
@@ -166,7 +167,7 @@ class LogisticRegression(object):
             Predicted target value for instances.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Insert a negative bias term. Use the probabilities
+        # Instructions: Insert a positive bias term. Use the probabilities
         # output by the decision function to decide the predicted (binary)
         # target value. Use a probability of 0.5 as the threshold, with
         # positive (+1) class predictions assigned to predicted probabilites
