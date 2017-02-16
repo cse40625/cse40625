@@ -60,7 +60,7 @@ class LogisticRegression(object):
 
         self.weight_ = None
 
-    def _compute_gradient(self, weights, X, y):
+    def _compute_gradient(self, X, y):
         """Compute the gradient for the logistic regression error.
 
         Logistic regression minimizes cross-entropy error:
@@ -85,7 +85,7 @@ class LogisticRegression(object):
         # Instructions: Return the gradient of the error.
         # ================================================
 
-    def _update_weight(self, grad, error=None):
+    def _update_weight(self, grad):
         """Updates the weight vector.
 
         Given the learning rate and gradient of the error, the updated weight
@@ -117,7 +117,7 @@ class LogisticRegression(object):
 
         Returns
         -------
-        P : float or array
+        P : float
             Predicted target value for instance(s).
         """
         # ================ YOUR CODE HERE ================
@@ -141,20 +141,20 @@ class LogisticRegression(object):
         np.random.seed(seed=self.random_state)
 
         # ================ YOUR CODE HERE ================
-        # Instructions: Insert a positive bias term into the beginning of the
-        # weight vector and initialize the weights with random samples from a
-        # Normal distribution with zero mean and unit variance. Iterate up to
-        # max_iter times. Each iteration, compute the gradient and use it to
-        # update the weight vector in the direction of the greatest decrease in
+        # Instructions: Insert a negative bias term and initialize the weights
+        # with random samples from a Normal distribution with zero mean and
+        # unit variance. Iterate up to max_iter times. Each iteration, compute
+        # the gradient (_compute_gradient) and use it to update the weight
+        # vector (_update_weight) in the direction of the greatest decrease in
         # error. Using the updated weight vector, apply the decision function
         # to generate the predicted target class probabilities, using a
-        # threshold on these probabilities to predict the target class values.
-        # Each iteration, print the current model accuracy. Halt if no
-        # misclassified instances remain.
+        # threshold on these probabilities to predict the target class values
+        # (predict). Each iteration, print the current model accuracy. Halt if
+        # no misclassified instances remain.
         # ================================================
 
     def predict(self, X):
-        """Predict class labels for instances in X.
+        """Predict target values for instances in X.
 
         Parameters
         ----------
@@ -167,12 +167,12 @@ class LogisticRegression(object):
             Predicted target value for instances.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Insert a positive bias term into the beginning of the
-        # weight vector. Use the probabilities output by the decision function
-        # to decide the predicted (binary) target value. Use a probability of
-        # 0.5 as the threshold, with positive (+1) class predictions assigned
-        # to predicted probabilites greater than 0.5 and negative (-1) class
-        # predictions assigned to predicted probabilities less than 0.5.
+        # Instructions: Insert a negative bias term. Use the probabilities
+        # output by the decision function to decide the predicted (binary)
+        # target value. Use a probability of 0.5 as the threshold, with
+        # positive (+1) class predictions assigned to predicted probabilites
+        # greater than 0.5 and negative (-1) class predictions assigned to
+        # predicted probabilities less than 0.5.
         # ================================================
 
 
