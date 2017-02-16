@@ -128,17 +128,40 @@ class Perceptron(object):
             for j in range(n_instances):
                 # ================ YOUR CODE HERE ================
                 # Instructions: Identify an instance misclassified by the
-                # decision function, and use it to update the weight vector.
-                # Print a line for each corrected instance with the line number
-                # (starting from 0), a space, and the current fraction of
-                # correctly classified instances to three decimal places. Halt
-                # when all instances are correctly classified.
+                # decision function (_decision_function), and use it to update
+                # the weight vector (_update_weight). Print a line for each
+                # corrected instance with the line number (starting from 0), a
+                # space, and the current fraction of correctly classified
+                # instances to three decimal places. Halt when all instances
+                # are correctly classified.
                 # ================================================
 
                 if acc == 1.0:
                     return self
 
         return self
+
+    def predict(self, X):
+        """Predict target values for instances in X.
+
+        Parameters
+        ----------
+        X : array, shape = [n_instances, n_features]
+            Instances.
+
+        Returns
+        -------
+        y_pred : array, shape = [n_instances]
+            Predicted target value for instances.
+        """
+        n_instances, n_features = np.shape(X)
+
+        # Insert bias term.
+        bias = np.negative(np.ones(shape=(n_instances, 1)))
+        X_1 = np.hstack((X, bias))
+
+        y_pred = self._decision_function(X_1)
+        return y_pred
 
 
 with open('output.txt', 'w') as f_out:
