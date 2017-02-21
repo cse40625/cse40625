@@ -166,5 +166,5 @@ with open('output.txt', 'w') as f_out:
     # ================ YOUR CODE HERE ================
     # Instructions: Initialize and fit the Gaussian naive Bayes model. Predict
     # on each instance using the fitted model. Print the accuracy of the
-    # prediction results, a newline, and the corresponding confusion matrix.
+    # prediction results, a blank line, and the corresponding confusion matrix.
     # ================================================
