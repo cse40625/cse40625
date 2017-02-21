@@ -62,8 +62,8 @@ class GaussianNB(object):
         Offset to avoid evaluation of log(0.0).
     theta_ : array, shape (n_classes, n_features)
         Mean of each feature per class.
-    sigma_ : array, shape (n_classes, n_features)
-        Variance of each feature per class.
+    sigma_ : array, shape (n_features)
+        Variance of each feature, independent of class.
 
     References
     ----------
@@ -95,9 +95,10 @@ class GaussianNB(object):
             Returns self.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Calculcate the empirical mean (theta) and variance
-        # (sigma) of each feature conditioned on each class. Add epsilon to
-        # each sigma value. Calculate the class priors.
+        # Instructions: Calculcate the empirical mean (theta) of each feature
+        # conditioned on each class and the unconditional variance (sigma) of
+        # each feature. Add epsilon to each sigma value. Calculate the class
+        # priors.
         # ================================================
 
     def _joint_log_likelihood(self, X):
