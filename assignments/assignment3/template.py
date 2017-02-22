@@ -76,10 +76,10 @@ class GaussianNB(object):
            Bayesian Classifiers." Proceedings of the Eleventh Conference on
            Uncertainty in Artificial Intelligence, pp. 338-345, 1995.
        [2] A. Y. Ng and M. I. Jordan. "On Discriminative vs. Generative
-           Classifiers: A Comparison of Logistic Regression and Naive Bayes.
+           Classifiers: A Comparison of Logistic Regression and Naive Bayes."
            Advances in Neural Information Processing Systems (NIPS) 2, pp. 
            841-848, 2002.
-       [3] H. Zhang. "The Optimality of Naive Bayes". Artificial Intelligence
+       [3] H. Zhang. "The Optimality of Naive Bayes." Artificial Intelligence
            1 (2): 3, 2004.
     """
 
