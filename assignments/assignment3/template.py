@@ -52,7 +52,8 @@ class GaussianNB(object):
     In this implementation, each conditional likelihood is parameterized as a
     univariate Gaussian distribution with mean conditioned on the target
     variable and variance not conditioned on the target variable. This model
-    is known as a discrete analog to logistic regression [2].
+    (gnb1) is known as a discrete analog to logistic regression [2]. The
+    variance could alternatively be conditioned on the target variable (gnb2).
 
     It has been shown that despite the assumption of conditional independence,
     Gaussian naive Bayes can still be optimal under certain conditions [3].
@@ -67,7 +68,7 @@ class GaussianNB(object):
         Offset to avoid evaluation of log(0.0).
     theta_ : array, shape (n_classes, n_features)
         Mean of each feature per class.
-    sigma_ : array, shape (n_features)
+    sigma_ : array, shape (n_features,)
         Variance of each feature, independent of class.
 
     References
