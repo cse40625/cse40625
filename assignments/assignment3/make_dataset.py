@@ -5,7 +5,7 @@ test = 'https://archive.ics.uci.edu/ml/machine-learning-databases/optdigits/optd
 
 
 def make_dataset():
-    """Make the binary digits dataset."""
+    """Make the digits dataset."""
     df_train = pd.read_csv(train, header=None)
     df_test = pd.read_csv(test, header=None)
     df = pd.concat([df_train, df_test], axis=0)
