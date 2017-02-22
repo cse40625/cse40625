@@ -49,11 +49,11 @@ class GaussianNB(object):
     distribution is modeled with a single Gaussian, the mean and standard
     deviation of which are estimated from the observed data [1].
 
-    In this implementation, each conditional likelihood is parameterized as a
-    univariate Gaussian distribution with mean conditioned on the target
+    In this implementation, each conditional likelihood can be parameterized as
+    a univariate Gaussian distribution with mean conditioned on the target
     variable and variance not conditioned on the target variable. This model
     (gnb1) is known as a discrete analog to logistic regression [2]. The
-    variance could alternatively be conditioned on the target variable (gnb2).
+    variance can alternatively be conditioned on the target variable (gnb2).
 
     It has been shown that despite the assumption of conditional independence,
     Gaussian naive Bayes can still be optimal under certain conditions [3].
