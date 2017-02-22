@@ -51,7 +51,7 @@ class GaussianNB(object):
 
     In this implementation, each conditional likelihood is parameterized as a
     univariate Gaussian distribution with mean conditioned on the target
-    variable and variances not conditioned on the target variable. This model
+    variable and variance not conditioned on the target variable. This model
     is known as a discrete analog to logistic regression [2].
 
     It has been shown that despite the assumption of conditional independence,
