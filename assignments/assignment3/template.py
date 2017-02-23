@@ -51,12 +51,18 @@ class GaussianNB(object):
 
     In this implementation, each conditional likelihood can be parameterized as
     a univariate Gaussian distribution with mean conditioned on the target
-    variable and variance not conditioned on the target variable. This model
-    (gnb1) is known as a discrete analog to logistic regression [2]. The
-    variance can alternatively be conditioned on the target variable (gnb2).
+    variable and standard deviation not conditioned on the target variable.
+    This model (gnb1) is known as a discrete analog to logistic regression [2].
+    The standard deviation can alternatively be conditioned on the target
+    variable (gnb2).
 
     It has been shown that despite the assumption of conditional independence,
     Gaussian naive Bayes can still be optimal under certain conditions [3].
+
+    Parameters
+    ----------
+    gnb_type_ : str, optional (default='gnb1')
+        Type of Gaussian naive Bayes to implement (`gnb1` or `gnb2`).
 
     Attributes
     ----------
@@ -68,8 +74,8 @@ class GaussianNB(object):
         Offset to avoid evaluation of log(0.0).
     theta_ : array, shape (n_classes, n_features)
         Mean of each feature per class.
-    sigma_ : array, shape (n_features,)
-        Variance of each feature, independent of class.
+    sigma_ : array, shape (n_features)
+        Standard deviation of each feature, unconditional of the class.
 
     References
     ----------
@@ -106,9 +112,9 @@ class GaussianNB(object):
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Calculcate the empirical mean (theta) of each feature
-        # conditioned on each class and the unconditional variance (sigma) of
-        # each feature. Add epsilon to each sigma value. Calculate the class
-        # priors.
+        # conditioned on each class and the unconditional standard deviation
+        # (sigma) of each feature. Add epsilon to each sigma value. Calculate
+        # the class priors.
         # ================================================
 
     def _joint_log_likelihood(self, X):
@@ -126,7 +132,7 @@ class GaussianNB(object):
         according to a Gaussian/Normal distribution.
 
         The probability density of the Normal distribution is
-            (1 / sqrt(2 * pi * sigma)) * e^(-(x - theta)^2 / (2 * sigma^2)),
+            (1 / (sqrt(2 * pi) * sigma)) * e^(-(x - theta)^2 / (2 * sigma^2)),
         which governs the relative likelihood that the value of x would equal
         that sample. The logarithm of this function can be calculated as
             -1/2 log(2 * pi) - log(sigma) - 1/2 (((x - theta)^2) / sigma^2),
