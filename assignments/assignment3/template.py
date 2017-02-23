@@ -59,11 +59,6 @@ class GaussianNB(object):
     It has been shown that despite the assumption of conditional independence,
     Gaussian naive Bayes can still be optimal under certain conditions [3].
 
-    Parameters
-    ----------
-    gnb_type_ : str, optional (default='gnb1')
-        Type of Gaussian naive Bayes to implement (`gnb1` or `gnb2`).
-
     Attributes
     ----------
     class_prior_ : array, shape (n_classes,)
