@@ -74,7 +74,7 @@ class GaussianNB(object):
         Offset to avoid evaluation of log(0.0).
     theta_ : array, shape (n_classes, n_features)
         Mean of each feature per class.
-    sigma_ : array, shape (n_features)
+    sigma_ : array, shape (n_features,)
         Standard deviation of each feature, unconditional of the class.
 
     References
