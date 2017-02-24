@@ -106,7 +106,7 @@ class GaussianNB(object):
             Returns self.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Calculcate the empirical mean (theta) of each feature
+        # Instructions: Calculate the empirical mean (theta) of each feature
         # conditioned on each class and the unconditional standard deviation
         # (sigma) of each feature. Add epsilon to each sigma value. Calculate
         # the class priors.
