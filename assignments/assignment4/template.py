@@ -163,7 +163,7 @@ class SLPClassifier(object):
            Data." AMLBook, 2012.
     """
 
-    def __init__(self, hidden_dim=(100,), batch_size=100, learning_rate=0.01,
+    def __init__(self, hidden_dim=100, batch_size=100, learning_rate=0.01,
                  max_iter=500, random_state=0):
         self.hidden_dim = hidden_dim
         self.learning_rate = learning_rate
@@ -341,7 +341,6 @@ class SLPClassifier(object):
         np.random.seed(seed=self.random_state)
 
         n_instances, n_features = X.shape
-        hidden_dim = list(self.hidden_dim)
 
         self.classes_ = np.unique(y)
         self.n_outputs_ = len(self.classes_)
