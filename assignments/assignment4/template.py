@@ -389,7 +389,7 @@ with open('output.txt', 'w') as f_out:
     X = df.ix[:, :-1]
     y = df.ix[:, -1]
 
-    clf = MLNNClassifier()
+    clf = SLNNClassifier()
     clf.fit(X.as_matrix(), y.as_matrix())
     y_pred = clf.predict(X.as_matrix())
 
