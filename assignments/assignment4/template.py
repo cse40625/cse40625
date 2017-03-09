@@ -360,8 +360,8 @@ class SLPClassifier(object):
         # max_iter times. Each iteration, feed forward the input, backpropagate
         # the partial derivatives computed with respect to the loss function,
         # and update the weights. Using the updated weight vector, generate
-        # predictions for the target class. Every one hundred iterations,
-        # print the current model accuracy.
+        # predictions for the target class. Every fifty iterations, print the
+        # current model accuracy.
         # ================================================
 
     def predict(self, X):
