@@ -279,7 +279,7 @@ class MLPClassifier(object):
             More specifically, deltas are gradients of loss with respect to z
             in each layer, where z = wx + b is the value of a particular layer
             before passing through the activation function.
-        batch_size : int, optional (default=100)
+        batch_size : int
             Size of minibatches.
 
         Returns
@@ -310,7 +310,7 @@ class MLPClassifier(object):
             More specifically, deltas are gradients of loss with respect to z
             in each layer, where z = wx + b is the value of a particular layer
             before passing through the activation function.
-        batch_size : int, optional (default=100)
+        batch_size : int
             Size of minibatches.
         """
         # ================ YOUR CODE HERE ================
