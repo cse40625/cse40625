@@ -147,14 +147,16 @@ class MLPClassifier(object):
 
     References
     ----------
-    .. [1] F. Rosenblatt. "The Perceptron: A Probalistic Model for Information 
-           Storage and Organization in the Brain," 1958.
+    .. [1] F. Rosenblatt. "The Perceptron: A Probabilistic Model for
+           Information Storage and Organization in the Brain." Psychological
+           Review 65 (6): 386-408, 1958.
 
     .. [2] P. Werbos. "Beyond Regression: New Tools for Prediction and Analysis 
-           in the Behavioral Sciences," 1975.
+           in the Behavioral Sciences." PhD Dissertation, Harvard University,
+           Cambridge, 1975.
 
     .. [3] G. E. Hinton. "Connectionist Learning Procedures." Artificial
-           Intelligence, 40 (1): 185-234, 1989.
+           Intelligence, 40 (1-3): 185-234, 1989.
     """
 
     def __init__(self, hidden_dim=(100,), learning_rate=0.01,
