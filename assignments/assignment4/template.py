@@ -237,7 +237,7 @@ class MLPClassifier(object):
         Parameters
         ----------
         X : array, shape = [n_instances, n_features]
-            Training data.
+            Input data.
         y : array, shape = [n_instances, n_targets]
             Target values.
         activations : list, length = n_layers - 1
@@ -271,7 +271,7 @@ class MLPClassifier(object):
         Parameters
         ----------
         X : array, shape = [n_instances, n_features]
-            Training data.
+            Input data.
         y : array, shape = [n_instances, n_targets]
             Target values.
         activations : list, length = n_layers - 1
@@ -367,7 +367,7 @@ class MLPClassifier(object):
         Parameters
         ----------
         X : array, shape = [n_instances, n_features]
-            Instances.
+            Input data.
 
         Returns
         -------
