@@ -98,7 +98,7 @@ def tanh_derivative(Z):
     return (1 - Z ** 2)
 
 
-class SLPClassifier(object):
+class SLNNClassifier(object):
     """Single-layer neural network classifier.
 
     A neural network is a system of interconnected "neurons" that can compute
@@ -389,7 +389,7 @@ with open('output.txt', 'w') as f_out:
     X = df.ix[:, :-1]
     y = df.ix[:, -1]
 
-    clf = MLPClassifier()
+    clf = MLNNClassifier()
     clf.fit(X.as_matrix(), y.as_matrix())
     y_pred = clf.predict(X.as_matrix())
 

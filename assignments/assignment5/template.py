@@ -98,7 +98,7 @@ def tanh_derivative(Z):
     return (1 - Z ** 2)
 
 
-class MLPClassifier(object):
+class MLNNClassifier(object):
     """Multilayer neural network classifier.
 
     A multilayer neural network is a system of interconnected "neurons" that
@@ -422,7 +422,7 @@ with open('output.txt', 'w') as f_out:
     X = df.ix[:, :-1]
     y = df.ix[:, -1]
 
-    clf = MLPClassifier()
+    clf = MLNNClassifier()
     clf.fit(X.as_matrix(), y.as_matrix())
     y_pred = clf.predict(X.as_matrix())
 
