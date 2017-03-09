@@ -66,7 +66,7 @@ def label_binarize(y):
 
 
 def tanh(X):
-    """Compute the hyperbolic tanh function inplace.
+    """Compute the hyperbolic tangent (tanh) function inplace.
 
     Parameters
     ----------
@@ -82,12 +82,12 @@ def tanh(X):
 
 
 def tanh_derivative(Z):
-    """Apply the derivative of the hyperbolic tanh function.
+    """Apply the derivative of the hyperbolic tangent (tanh) function.
 
     Parameters
     ----------
     Z : array, shape = [n_instances, n_features]
-        The data which was output from the hyperbolic tangent activation
+        The data that was output from the hyperbolic tangent activation
         function during the forward pass.
 
     Returns
@@ -111,8 +111,8 @@ class MLPClassifier(object):
 
     The classifier trains iteratively. At each iteration, the partial
     derivatives of the loss function with respect to the model parameters are
-    computed to update the parameters, with these partial deviatives are
-    propogated backwards ("backpropogated") through the network [2, 3].
+    computed to update the parameters, with these partial derivatives are
+    propagated backwards ("backpropagated") through the network [2, 3].
 
     This implementation uses a hyperbolic tangent output transformation and
     optimizes the squared loss function using stochastic gradient descent [4].
@@ -213,7 +213,7 @@ class MLPClassifier(object):
         # ================================================
 
     def _backprop(self, X, y, activations, deltas):
-        """Backpropagation to compute sensitivites, delta, at each layer.
+        """Backpropagation to compute sensitivities, delta, at each layer.
 
         The sensitivities are computed from the loss function and its
         corresponding derivatives with respect to the weight and bias vectors.
@@ -226,7 +226,7 @@ class MLPClassifier(object):
         the dot product of the weights at layer L and the activations at layer
         L-1, and theta'() is the derivative of the output transformation.
 
-        The sensitivites from layers l = L-1 to 1 are backpropogated as:
+        The sensitivities from layers l = L-1 to 1 are backpropagated as:
             delta^l = 2 * theta'(s^L) x [W^{l+1} * delta^{l+1}],
         where s^L is the dot product of the weights at layer l and activations
         at layer l-1, W^{l+1} is the weights at layer l-1, x denotes matrix
@@ -253,7 +253,7 @@ class MLPClassifier(object):
             Gradient of the error.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Compute and return the sensitivites at each layer.
+        # Instructions: Compute and return the sensitivities at each layer.
         # ================================================
 
     def _compute_gradient(self, layer, activations, deltas, batch_size):
@@ -263,7 +263,7 @@ class MLPClassifier(object):
             G^l(x_n) = [x^{l-1} * (delta^l).T]
             G^l = G^l + 1/N * G^l(x_n)
         where x^l are the activations at layer l and delta^l are the
-        sensitiviates at layer l.
+        sensitivities at layer l.
 
         Parameters
         ----------
@@ -350,8 +350,8 @@ class MLPClassifier(object):
 
         # ================ YOUR CODE HERE ================
         # Instructions: Fit the multilayer neural network. Iterate up to
-        # max_iter times. Each iteration, feed forward the input, backpropogate
-        # the partial derivaties computed with respect to the loss function,
+        # max_iter times. Each iteration, feed forward the input, backpropagate
+        # the partial derivatives computed with respect to the loss function,
         # and update the weights. Using the updated weight vector, generate
         # predictions for the target class. Every one hundred iterations,
         # print the current model accuracy.
