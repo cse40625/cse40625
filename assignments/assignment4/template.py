@@ -111,11 +111,12 @@ class MLPClassifier(object):
 
     The classifier trains iteratively. At each iteration, the partial
     derivatives of the loss function with respect to the model parameters are
-    computed to update the parameters, with these partial derivatives are
+    computed to update the parameters. These partial derivatives are then
     propagated backwards ("backpropagated") through the network [2, 3].
 
-    This implementation uses a hyperbolic tangent output transformation and
-    optimizes the squared loss function using stochastic gradient descent [4].
+    This implementation uses a hyperbolic tangent activation function and
+    output transformation and optimizes the squared loss function using
+    (minibatch) stochastic gradient descent [4].
 
     Parameters
     ----------
@@ -135,11 +136,11 @@ class MLPClassifier(object):
     classes_ : array, shape = [n_classes,]
         Class labels for each output.
     weight_ : list, length n_layers - 1
-        The ith element in the list represents the weight matrix corresponding
-        to layer i.
+        Weights for each layer. The ith element in the list represents the
+        weight matrix corresponding to layer i.
     bias_ : list, length n_layers - 1
-        The ith element in the list represents the bias vector corresponding to
-        layer i + 1.
+        Biases for each layer. The ith element in the list represents the bias
+        vector corresponding to layer i + 1.
     n_layers_ : int
         Number of layers.
     n_outputs_ : int
@@ -201,7 +202,8 @@ class MLPClassifier(object):
         Parameters
         ----------
         activations : list, length = n_layers - 1
-            The ith element of the list holds the values of the ith layer.
+            Activations for each layer. The ith element of the list holds the
+            values of the ith layer.
 
         Returns
         -------
@@ -239,13 +241,14 @@ class MLPClassifier(object):
         y : array, shape = [n_instances, n_targets]
             Target values.
         activations : list, length = n_layers - 1
-            The ith element of the list holds the values of the ith layer.
+            Activations for each layer. The ith element of the list holds the
+            values of the ith layer.
         deltas : list, length = n_layers - 1
-            The ith element of the list holds the difference between the
-            activations of the i + 1 layer and the backpropagated error.
-            More specifically, deltas are gradients of loss with respect to z
-            in each layer, where z = wx + b is the value of a particular layer
-            before passing through the activation function.
+            Sensitivities for each layer. The ith element of the list holds the
+            difference between the activations of the i + 1 layer and the
+            backpropagated error. The sensitivities are gradients of loss with 
+            respect to z in each layer, where z = wx + b is the value of a
+            particular layer before passing through the activation function.
 
         Returns
         -------
@@ -272,13 +275,14 @@ class MLPClassifier(object):
         y : array, shape = [n_instances, n_targets]
             Target values.
         activations : list, length = n_layers - 1
-            The ith element of the list holds the values of the ith layer.
+            Activations for each layer. The ith element of the list holds the
+            values of the ith layer.
         deltas : list, length = n_layers - 1
-            The ith element of the list holds the difference between the
-            activations of the i + 1 layer and the backpropagated error.
-            More specifically, deltas are gradients of loss with respect to z
-            in each layer, where z = wx + b is the value of a particular layer
-            before passing through the activation function.
+            Sensitivities for each layer. The ith element of the list holds the
+            difference between the activations of the i + 1 layer and the
+            backpropagated error. The sensitivities are gradients of loss with 
+            respect to z in each layer, where z = wx + b is the value of a
+            particular layer before passing through the activation function.
         batch_size : int
             Size of minibatches.
 
@@ -303,13 +307,14 @@ class MLPClassifier(object):
         Parameters
         ----------
         activations : list, length = n_layers - 1
-            The ith element of the list holds the values of the ith layer.
+            Activations for each layer. The ith element of the list holds the
+            values of the ith layer.
         deltas : list, length = n_layers - 1
-            The ith element of the list holds the difference between the
-            activations of the i + 1 layer and the backpropagated error.
-            More specifically, deltas are gradients of loss with respect to z
-            in each layer, where z = wx + b is the value of a particular layer
-            before passing through the activation function.
+            Sensitivities for each layer. The ith element of the list holds the
+            difference between the activations of the i + 1 layer and the
+            backpropagated error. The sensitivities are gradients of loss with 
+            respect to z in each layer, where z = wx + b is the value of a
+            particular layer before passing through the activation function.
         batch_size : int
             Size of minibatches.
         """
