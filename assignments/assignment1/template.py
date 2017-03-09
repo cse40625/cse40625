@@ -83,7 +83,7 @@ class Perceptron(object):
         """Decides target value for instance(s).
 
         The predicted target value for each instance x of X is computed as:
-            sign(w.T * x)
+            sign(w.T · x)
         where w is the weight vector and x is the feature vector or matrix.
 
         Parameters
