@@ -180,6 +180,11 @@ class SLPClassifier(object):
             Size of input.
         fan_out : int
             Size of output.
+
+        Returns
+        -------
+        W : array, shape = [fan_in, fan_out]
+            Initialized weights.
         """
         init_bound = np.sqrt(6. / (fan_in + fan_out))
         W = np.random.uniform(-init_bound, init_bound,

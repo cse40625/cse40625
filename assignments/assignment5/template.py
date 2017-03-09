@@ -172,18 +172,43 @@ class MLPClassifier(object):
         self.random_state = random_state
 
     def _initialize(self, layer_dim):
-        """Initialize parameters."""
+        """Initialize parameters.
+
+        Parameters
+        ----------
+        layer_dim : list, length = n_layers
+            Number of dimensions for each layer. The ith element of the list
+            holds the dimensions of the ith layer.
+        """
         self.n_layers_ = len(layer_dim)
 
         # Initialize weights and biases.
         self.weight_ = []
         self.bias_ = []
         for i in range(self.n_layers_ - 1):
-            init_bound = np.sqrt(6. / (layer_dim[i] + layer_dim[i + 1]))
-            W = np.random.uniform(-init_bound, init_bound,
-                                  (layer_dim[i], layer_dim[i + 1]))
+            W = self._init_weight(layer_dim[i], layer_dim[i + 1])
             self.weight_.append(W)
             self.bias_.append(np.ones(layer_dim[i + 1]))
+
+    def _init_weight(self, fan_in, fan_out):
+        """Initialize weights.
+
+        Parameters
+        ----------
+        fan_in : int
+            Size of input.
+        fan_out : int
+            Size of output.
+
+        Returns
+        -------
+        W : array, shape = [fan_in, fan_out]
+            Initialized weights.
+        """
+        init_bound = np.sqrt(6. / (fan_in + fan_out))
+        W = np.random.uniform(-init_bound, init_bound,
+                                  (fan_in, fan_out))
+        return W
 
     def _forward_pass(self, activations):
         """Feed forward.
