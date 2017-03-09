@@ -156,7 +156,7 @@ class MLPClassifier(object):
            Cambridge, 1975.
 
     .. [3] G. E. Hinton. "Connectionist Learning Procedures." Artificial
-           Intelligence, 40 (1-3): 185-234, 1989.
+           Intelligence 40 (1-3): 185-234, 1989.
 
     .. [4] Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from
            Data." AMLBook, 2012.
