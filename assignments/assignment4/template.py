@@ -236,7 +236,7 @@ class MLPClassifier(object):
 
         Parameters
         ----------
-        X : array, shape = [n_instances, n_features + 1]
+        X : array, shape = [n_instances, n_features]
             Training data.
         y : array, shape = [n_instances, n_targets]
             Target values.
@@ -270,7 +270,7 @@ class MLPClassifier(object):
 
         Parameters
         ----------
-        X : array, shape = [n_instances, n_features + 1]
+        X : array, shape = [n_instances, n_features]
             Training data.
         y : array, shape = [n_instances, n_targets]
             Target values.
@@ -328,9 +328,8 @@ class MLPClassifier(object):
         Parameters
         ----------
         X : array, shape = [n_instances, n_features]
-            Training vectors, where n_samples is the number of samples
-            and n_features is the number of features.
-        y : array, shape = [n_instances,]
+            Training data.
+        y : array, shape = [n_instances, n_targets]
             Target values.
 
         Returns
