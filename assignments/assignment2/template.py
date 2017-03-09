@@ -90,9 +90,8 @@ class LogisticRegression(object):
 
         Given the learning rate and gradient of the error, the updated weight
         vector w can be computed as:
-            w_{k+1} = w_k + learning_rate * -grad
-        where k is the iteration. This adjusts the weight vector in the
-        direction of negative error proportional to the learning rate.
+            w = learning_rate * -grad
+        which adjusts the weight vector in the direction of negative error.
 
         Parameters
         ----------
@@ -109,7 +108,7 @@ class LogisticRegression(object):
         The predicted target value for each instance x of X is computed as:
             theta(w.T * x)
         where theta is the logistic function, w is the weight vector, and x is
-        the feature vector or matrix.
+        the feature vector.
 
         Parameters
         ----------

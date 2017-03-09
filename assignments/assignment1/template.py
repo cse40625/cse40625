@@ -32,7 +32,7 @@ class Perceptron(object):
     negative bias term (i.e., a feature column of -1). The weight vector is
     initialized with random samples from a uniform distribution over [0, 1).
     The model is updated only on misclassified instances, using the sign of the
-    dot product of the weight and feature vectors as the target prediction.
+    dot product of the weight and feature vectors as the target prediction [2].
 
     Parameters
     ----------
@@ -51,6 +51,9 @@ class Perceptron(object):
     .. [1] F. Rosenblatt. "The Perceptron: A Probabilistic Model for
            Information Storage and Organization in the Brain." Psychological
            Review 65 (6): 386-408, 1958.
+
+    .. [2] Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from
+           Data." AMLBook, 2012.
     """
 
     def __init__(self, random_state=0):

@@ -114,8 +114,8 @@ class MLPClassifier(object):
     computed to update the parameters, with these partial deviatives are
     propogated backwards ("backpropogated") through the network [2, 3].
 
-    This implementation uses a hyperbolic tangent (tanh) output transformation
-    and optimizes the squared loss function using stochastic gradient descent.
+    This implementation uses a hyperbolic tangent output transformation and
+    optimizes the squared loss function using stochastic gradient descent [4].
 
     Parameters
     ----------
@@ -157,6 +157,9 @@ class MLPClassifier(object):
 
     .. [3] G. E. Hinton. "Connectionist Learning Procedures." Artificial
            Intelligence, 40 (1-3): 185-234, 1989.
+
+    .. [4] Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from
+           Data." AMLBook, 2012.
     """
 
     def __init__(self, hidden_dim=(100,), learning_rate=0.01,
