@@ -98,16 +98,16 @@ def tanh_derivative(Z):
     return (1 - Z ** 2)
 
 
-class SLPClassifier(object):
-    """Single-layer neural network classifier.
+class MLPClassifier(object):
+    """Multilayer neural network classifier.
 
-    A neural network is a system of interconnected "neurons" that can compute
-    values from inputs by feeding information through the network. A single
-    neuron can be modeled as a perceptron [1] or "logistic unit" through which
-    a series of features and associated weights are passed. The output of 
-    neurons at at the first layer are used as the input to neurons in a hidden
-    layer. The output of the network is computed by applying an output
-    transformation to the inputs of the hidden layer of neurons.
+    A multilayer neural network is a system of interconnected "neurons" that
+    can compute values from inputs by feeding information through the network.
+    A single neuron can be modeled as a perceptron [1] or "logistic unit"
+    through which a series of features and associated weights are passed. The
+    output of neurons at earlier layers are used as the input to neurons at
+    later ones. The output of the network is computed by applying an output
+    transformation to the inputs of the final layer of neurons.
 
     The classifier trains iteratively. At each iteration, the partial
     derivatives of the loss function with respect to the model parameters are
@@ -171,20 +171,19 @@ class SLPClassifier(object):
         self.max_iter = max_iter
         self.random_state = random_state
 
-    def _init_weight(self, fan_in, fan_out):
-        """Initialize weights.
+    def _initialize(self, layer_dim):
+        """Initialize parameters."""
+        self.n_layers_ = len(layer_dim)
 
-        Parameters
-        ----------
-        fan_in : int
-            Size of input.
-        fan_out : int
-            Size of output.
-        """
-        init_bound = np.sqrt(6. / (fan_in + fan_out))
-        W = np.random.uniform(-init_bound, init_bound,
-                                  (fan_in, fan_out))
-        return W
+        # Initialize weights and biases.
+        self.weight_ = []
+        self.bias_ = []
+        for i in range(self.n_layers_ - 1):
+            init_bound = np.sqrt(6. / (layer_dim[i] + layer_dim[i + 1]))
+            W = np.random.uniform(-init_bound, init_bound,
+                                  (layer_dim[i], layer_dim[i + 1]))
+            self.weight_.append(W)
+            self.bias_.append(np.ones(layer_dim[i + 1]))
 
     def _forward_pass(self, activations):
         """Feed forward.
@@ -324,7 +323,7 @@ class SLPClassifier(object):
         # ================================================
 
     def fit(self, X, y):
-        """Fit a single-layer neural network.
+        """Fit a multilayer neural network.
 
         Parameters
         ----------
@@ -350,11 +349,11 @@ class SLPClassifier(object):
 
         batch_size = min(self.batch_size, n_instances)
 
-        hidden_dim = self.hidden_dim
-        n_outputs_ = self.n_outputs_
+        layer_dim = ([n_features] + hidden_dim + [self.n_outputs_])
+        self._initialize(layer_dim)
 
         # ================ YOUR CODE HERE ================
-        # Instructions: Fit the single-layer neural network. Iterate up to
+        # Instructions: Fit the multilayer neural network. Iterate up to
         # max_iter times. Each iteration, feed forward the input, backpropagate
         # the partial derivatives computed with respect to the loss function,
         # and update the weights. Using the updated weight vector, generate
