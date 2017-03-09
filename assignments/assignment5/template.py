@@ -120,7 +120,7 @@ class MLPClassifier(object):
 
     Parameters
     ----------
-    hidden_dim : list, optional (default=(100,))
+    hidden_dim : list, optional (default=(100, 100))
         Number of units per hidden layer.
     batch_size : int, optional (default=100)
         Size of minibatches.
@@ -163,8 +163,8 @@ class MLPClassifier(object):
            Data." AMLBook, 2012.
     """
 
-    def __init__(self, hidden_dim=(100,), batch_size=100, learning_rate=0.01,
-                 max_iter=500, random_state=0):
+    def __init__(self, hidden_dim=(100, 100), batch_size=100,
+                 learning_rate=0.01, max_iter=500, random_state=0):
         self.hidden_dim = hidden_dim
         self.learning_rate = learning_rate
         self.batch_size = batch_size
