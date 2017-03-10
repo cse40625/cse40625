@@ -103,9 +103,9 @@ def tanh_derivative(Z):
 
 
 class MLNNClassifier(object):
-    """Multilayer neural network classifier.
+    """Multi-layer neural network classifier.
 
-    A multilayer neural network is a system of interconnected "neurons" that
+    A multi-layer neural network is a system of interconnected "neurons" that
     can compute values from inputs by feeding information through the network.
     A single neuron can be modeled as a perceptron [1] or "logistic unit"
     through which a series of features and associated weights are passed. The
@@ -366,7 +366,7 @@ class MLNNClassifier(object):
         # ================================================
 
     def fit(self, X, y):
-        """Fit a multilayer neural network.
+        """Fit a multi-layer neural network.
 
         Parameters
         ----------
@@ -396,7 +396,7 @@ class MLNNClassifier(object):
         self._initialize(layer_dim)
 
         # ================ YOUR CODE HERE ================
-        # Instructions: Fit the multilayer neural network. Iterate up to
+        # Instructions: Fit the multi-layer neural network. Iterate up to
         # max_iter times. Each iteration, feed forward the input, backpropagate
         # the partial derivatives computed with respect to the loss function,
         # and update the weights. Using the updated weight vector, generate
