@@ -237,7 +237,8 @@ class MLNNClassifier(object):
             x_l = theta(s_l + bias),
         where x_l is the activations at layer l, s_l is the dot product of the
         weights at layer l and the activations at layer l-1, and theta() is
-        the output transformation. The output hypothesis is h(x) = x_L.
+        the output transformation. The output hypothesis is h(x) = x_L. The dot
+        product is denoted by ·.
 
         Parameters
         ----------
@@ -272,9 +273,9 @@ class MLNNClassifier(object):
         The sensitivities from layers l = L-1 to 1 are backpropagated as:
             delta_l = 2 * theta'(s_l) × [W_{l+1} · delta_{l+1}],
         where s_l is the dot product of the weights at layer l and activations
-        at layer l-1, W_{l+1} is the weights at layer l-1, matrix
-        multiplication is denoted by ×, and theta'(s_l) is the derivative of
-        the output transformation applied to s_l.
+        at layer l-1, W_{l+1} is the weights at layer l+1, and theta'(s_l) is
+        the derivative of the output transformation applied to s_l. Matrix
+        multiplication is denoted by ×.
 
         Parameters
         ----------
