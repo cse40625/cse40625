@@ -1,6 +1,3 @@
-.. -*- mode: rst -*-
-
-University of Notre Dame
 CSE 40625: Machine Learning (Spring 2017)
 ==============================
 
