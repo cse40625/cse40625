@@ -120,7 +120,7 @@ class SLNNClassifier(object):
 
     Parameters
     ----------
-    hidden_dim : list, optional (default=(100,))
+    hidden_dim : list, optional (default=100)
         Number of units per hidden layer.
     batch_size : int, optional (default=100)
         Size of minibatches.
