@@ -10,6 +10,6 @@ Collection of resources for Notre Dame CSE Machine Learning course (CSE 40625).
 5. Multi-Layer Neural Network
 
 ### References
-1. Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from Data." AMLBook, 2012.
-2. T. Mitchell. "Machine Learning." McGraw Hill, 1997.
-3. T. Hastie et al. "The Elements of Statistical Learning." Springer, 2009.
+* Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from Data." AMLBook, 2012.
+* T. Mitchell. "Machine Learning." McGraw Hill, 1997.
+* T. Hastie et al. "The Elements of Statistical Learning." Springer, 2009.
