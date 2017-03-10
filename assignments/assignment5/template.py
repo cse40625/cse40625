@@ -41,12 +41,16 @@ def confusion_matrix(y_true, y_pred):
 
 
 def label_binarize(y):
-    """Binarize labels in a one-vs-all fashion.
+    """Binarize labels in a one-vs-all fashion using one-hot encoding.
+
+    The output will be a matrix where each column corresponds to one possible
+    value of the input array, with the number of columns equal to the number
+    of unique values in the input array.
 
     Parameters
     ----------
     y : array, shape = [n_instances,]
-        Array to binarize.
+        Sequence of integer labels to encode.
 
     Returns
     -------
@@ -262,13 +266,15 @@ class MLNNClassifier(object):
             delta_L = 2 * (x_L - y) * theta'(s_L),
         where x_L is the activations at layer L, y is the target values, s_L is
         the dot product of the weights at layer L and the activations at layer
-        L-1, and theta'() is the derivative of the output transformation.
+        L-1, and theta'() is the derivative of the output transformation
+        applied to s_L.
 
         The sensitivities from layers l = L-1 to 1 are backpropagated as:
-            delta_l = 2 * theta'(s_L) × [W_{l+1} · delta_{l+1}],
+            delta_l = 2 * theta'(s_l) × [W_{l+1} · delta_{l+1}],
         where s_L is the dot product of the weights at layer l and activations
         at layer l-1, W_{l+1} is the weights at layer l-1, matrix
-        multiplication is denoted by ×, and theta'(s_l) = [1 - x_l × x_l].
+        multiplication is denoted by ×, and theta'(s_l) is the derivative of
+        the output transformation applied to s_L
 
         Parameters
         ----------
