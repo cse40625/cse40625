@@ -1,5 +1,6 @@
 #CSE 40625: Machine Learning (Spring 2017)
-## University of Notre Dame
+
+Collection of resources for Notre Dame CSE Machine Learning course (CSE 40625).
 
 ### Assignments
 1. Perceptron
