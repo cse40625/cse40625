@@ -168,7 +168,7 @@ class SLNNClassifier(object):
     """
 
     def __init__(self, hidden_dim=100, batch_size=100, learning_rate=0.01,
-                 max_iter=500, random_state=0):
+                 max_iter=500, random_state=None):
         self.hidden_dim = hidden_dim
         self.learning_rate = learning_rate
         self.batch_size = batch_size
@@ -396,9 +396,10 @@ with open('output.txt', 'w') as f_out:
     X = df.ix[:, :-1]
     y = df.ix[:, -1]
 
-    clf = SLNNClassifier()
+    clf = SLNNClassifier(random_state=0)
     clf.fit(X, y)
     y_pred = clf.predict(X)
 
-    cm = confusion_matrix(y, y_pred)
-    f_out.write("\n{}".format(cm))
+    # ================ YOUR CODE HERE ================
+    # Print a blank line and the corresponding confusion matrix.
+    # ================================================

@@ -56,7 +56,7 @@ class Perceptron(object):
            Data." AMLBook, 2012.
     """
 
-    def __init__(self, random_state=0):
+    def __init__(self, random_state=None):
         self.random_state = random_state
 
         self.weight_ = None
@@ -169,6 +169,8 @@ class Perceptron(object):
 
 with open('output.txt', 'w') as f_out:
     df = pd.read_csv('digits_binary.csv')
-    # ================ YOUR CODE HERE ================
-    # Instructions: Initialize and fit the perceptron.
-    # ================================================
+    X = df.ix[:, :-1]
+    y = df.ix[:, -1]
+
+    clf = Perceptron(random_state=0)
+    clf.fit(X, y)

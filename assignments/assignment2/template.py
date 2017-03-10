@@ -53,7 +53,7 @@ class LogisticRegression(object):
            Data." AMLBook, 2012.
     """
 
-    def __init__(self, max_iter=500, learning_rate=0.01, random_state=0):
+    def __init__(self, max_iter=500, learning_rate=0.01, random_state=None):
         self.max_iter = max_iter
         self.learning_rate = learning_rate
         self.random_state = random_state
@@ -181,6 +181,5 @@ with open('output.txt', 'w') as f_out:
     X = df.ix[:, :-1]
     y = df.ix[:, -1]
 
-    # ================ YOUR CODE HERE ================
-    # Instructions: Initialize and fit the logistic regression model.
-    # ================================================
+    clf = LogisticRegression(random_state=0)
+    clf.fit(X, y)

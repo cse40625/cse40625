@@ -177,8 +177,11 @@ with open('output.txt', 'w') as f_out:
     X = df.ix[:, :-1]
     y = df.ix[:, -1]
 
+    clf = GaussianNB()
+    clf.fit(X, y)
+    y_pred = clf.predict(X)
+
     # ================ YOUR CODE HERE ================
-    # Instructions: Initialize and fit the Gaussian naive Bayes model. Predict
-    # on each instance using the fitted model. Print the accuracy of the
-    # prediction results, a blank line, and the corresponding confusion matrix.
+    # Print the accuracy of the prediction results, a blank line, and the
+    # corresponding confusion matrix.
     # ================================================
