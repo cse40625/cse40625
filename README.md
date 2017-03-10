@@ -5,7 +5,7 @@ Collection of resources for Notre Dame CSE Machine Learning course (CSE 40625).
 ### Assignments
 1. Perceptron
 2. Logistic Regression
-3. Gaussian Naive Bayes
+3. Gaussian Na&iuml;ve Bayes
 4. Single-Layer Neural Network
 5. Multi-Layer Neural Network
 
