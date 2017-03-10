@@ -429,8 +429,8 @@ with open('output.txt', 'w') as f_out:
     y = df.ix[:, -1]
 
     clf = MLNNClassifier()
-    clf.fit(X.as_matrix(), y.as_matrix())
-    y_pred = clf.predict(X.as_matrix())
+    clf.fit(X, y)
+    y_pred = clf.predict(X)
 
     cm = confusion_matrix(y, y_pred)
     f_out.write("\n{}".format(cm))
