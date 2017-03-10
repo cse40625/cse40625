@@ -271,10 +271,10 @@ class MLNNClassifier(object):
 
         The sensitivities from layers l = L-1 to 1 are backpropagated as:
             delta_l = 2 * theta'(s_l) × [W_{l+1} · delta_{l+1}],
-        where s_L is the dot product of the weights at layer l and activations
+        where s_l is the dot product of the weights at layer l and activations
         at layer l-1, W_{l+1} is the weights at layer l-1, matrix
         multiplication is denoted by ×, and theta'(s_l) is the derivative of
-        the output transformation applied to s_L
+        the output transformation applied to s_l.
 
         Parameters
         ----------
@@ -306,7 +306,7 @@ class MLNNClassifier(object):
 
         For each instance x_n (in the batch), the gradient is computed as
             G_l(x_n) = [x_{l-1} · (delta_l).T]
-            G_l = G_l + 1/N * G_l(x_n)
+            G_l = G_l + 1/N * G_l(x_n),
         where x_l is the activations at layer l, delta_l is the sensitivities
         at layer l, and N is the number of instances (in the batch).
 
@@ -342,7 +342,7 @@ class MLNNClassifier(object):
 
         Given the learning rate and gradient of the error, the updated weight
         vector w can be computed as:
-            w_{i+1} = w_i - learning_rate * grad
+            w_{i+1} = w_i - learning_rate * grad,
         where i is the ith layer. This adjusts the weight vector in the
         direction of negative error proportional to the learning rate.
 
