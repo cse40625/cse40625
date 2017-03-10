@@ -302,7 +302,7 @@ class MLNNClassifier(object):
         # Instructions: Compute and return the sensitivities at each layer.
         # ================================================
 
-    def _compute_gradient(self, layer, activations, deltas, batch_size):
+    def _compute_gradient(self, activations, deltas, batch_size):
         """Compute the gradient.
 
         For each instance x_n (in the batch), the gradient is computed as
@@ -313,10 +313,6 @@ class MLNNClassifier(object):
 
         Parameters
         ----------
-        X : array, shape = [n_instances, n_features]
-            Input data.
-        y : array, shape = [n_instances, n_targets]
-            Target values.
         activations : list, length = n_layers - 1
             Activations for each layer. The ith element of the list holds the
             values of the ith layer.
