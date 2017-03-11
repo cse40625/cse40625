@@ -64,10 +64,11 @@ class LogisticRegression(object):
         """Compute the gradient for the logistic regression error.
 
         Logistic regression minimizes cross-entropy error:
-            E(w) = 1/N \sum_N ln(1 + exp(y_n * w.T · x_n)),
+            E(w) = 1/N \sum_N ln(1 + exp(y_n * w.T \dot x_n)),
         which can be minimized by computing the gradient:
-            grad = -1/N \sum_N ((y_n * x_n) / (1 + exp(y_n * w.T · x_n))),
-        where N is the number of instances and w are the weights.
+            grad = -1/N \sum_N ((y_n * x_n) / (1 + exp(y_n * w.T \dot x_n))),
+        where N is the number of instances, w are the weights, and the dot
+        product is denoted by \dot.
 
         Parameters
         ----------
