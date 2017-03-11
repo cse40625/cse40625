@@ -106,9 +106,9 @@ class LogisticRegression(object):
         """Decides target value for instance(s).
 
         The predicted target value for each instance x of X is computed as:
-            theta(w.T · x)
-        where theta is the logistic function, w is the weight vector, and x is
-        the feature vector.
+            theta(w.T \dot x)
+        where theta is the logistic function, w is the weight vector, x is the
+        feature vector or matrix, and the dot product is denoted by \dot.
 
         Parameters
         ----------

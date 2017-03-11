@@ -199,14 +199,14 @@ class SLNNClassifier(object):
         Perform a forward pass on the network by computing the values of the
         activations (neurons) in the hidden layers and the output layer.
 
-        The activations are initialized as input x. The activations from
-        layers l = 1 to L are computed as:
-            s_l = (W_l).T · x_{l-1}
-            x_l = theta(s_l + bias),
-        where x_l is the activations at layer l, s_l is the dot product of the
-        weights at layer l and the activations at layer l-1, and theta() is
-        the output transformation. The output hypothesis is h(x) = x_L. The dot
-        product is denoted by ·.
+        The activations are initialized as input x_in. The activations of the
+        output layer are computed as:
+            s = W.T \dot x_in
+            x_out = theta(s + bias),
+        where x_in is the input activations, s is the dot product of the
+        weights and the input activations, and theta() is the output
+        transformation. The output hypothesis is h(x) = x_out. The dot product
+        is denoted by \dot.
 
         Parameters
         ----------
@@ -223,7 +223,7 @@ class SLNNClassifier(object):
         # Instructions: Compute and return the activations at each layer.
         # ================================================
 
-    def _backprop(self, X, y, activations, deltas):
+    def _backprop(self, y, activations, deltas):
         """Backpropagation to compute sensitivities at each layer.
 
         The sensitivities are computed from the loss function and its
@@ -238,17 +238,8 @@ class SLNNClassifier(object):
         L-1, and theta'() is the derivative of the output transformation
         applied to s_L.
 
-        The sensitivities from layers l = L-1 to 1 are backpropagated as:
-            delta_l = 2 * theta'(s_l) × [W_{l+1} · delta_{l+1}],
-        where s_l is the dot product of the weights at layer l and activations
-        at layer l-1, W_{l+1} is the weights at layer l+1, and theta'(s_l) is
-        the derivative of the output transformation applied to s_l. Matrix
-        multiplication is denoted by × and the dot product is denoted by ·.
-
         Parameters
         ----------
-        X : array, shape = [n_instances, n_features]
-            Input data.
         y : array, shape = [n_instances, n_targets]
             Target values.
         activations : list, length = n_layers - 1
@@ -274,10 +265,11 @@ class SLNNClassifier(object):
         """Compute the gradient.
 
         For each instance x_n (in the batch), the gradient is computed as
-            G_l(x_n) = [x_{l-1} · (delta_l).T]
-            G_l = G_l + 1/N * G_l(x_n),
-        where x_l is the activations at layer l, delta_l is the sensitivities
-        at layer l, and N is the number of instances (in the batch).
+            G(x_n) = [x \dot delta.T]
+            G = G + 1/N * G(x_n),
+        where x is the input activations, delta is the sensitivities, N is
+        the number of instances (in the batch), and the dot product is denoted
+        by \dot.
 
         Parameters
         ----------
