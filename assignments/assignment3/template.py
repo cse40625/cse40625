@@ -172,16 +172,17 @@ class GaussianNB(object):
         # ================================================
 
 
-with open('output.txt', 'w') as f_out:
-    df = pd.read_csv('digits.csv')
-    X = df.ix[:, :-1]
-    y = df.ix[:, -1]
+if __name__ == "__main__":
+    with open('output.txt', 'w') as f_out:
+        df = pd.read_csv('digits.csv')
+        X = df.ix[:, :-1]
+        y = df.ix[:, -1]
 
-    clf = GaussianNB()
-    clf.fit(X, y)
-    y_pred = clf.predict(X)
+        clf = GaussianNB()
+        clf.fit(X, y)
+        y_pred = clf.predict(X)
 
-    # ================ YOUR CODE HERE ================
-    # Print the accuracy of the prediction results, a blank line, and the
-    # corresponding confusion matrix.
-    # ================================================
+        # ================ YOUR CODE HERE ================
+        # Print the accuracy of the prediction results, a blank line, and the
+        # corresponding confusion matrix.
+        # ================================================

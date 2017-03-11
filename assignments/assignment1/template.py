@@ -168,10 +168,11 @@ class Perceptron(object):
         return y_pred
 
 
-with open('output.txt', 'w') as f_out:
-    df = pd.read_csv('digits_binary.csv')
-    X = df.ix[:, :-1]
-    y = df.ix[:, -1]
+if __name__ == "__main__":
+    with open('output.txt', 'w') as f_out:
+        df = pd.read_csv('digits_binary.csv')
+        X = df.ix[:, :-1]
+        y = df.ix[:, -1]
 
-    clf = Perceptron(random_state=0)
-    clf.fit(X, y)
+        clf = Perceptron(random_state=0)
+        clf.fit(X, y)

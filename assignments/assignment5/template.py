@@ -419,16 +419,17 @@ class MLNNClassifier(object):
         # ================================================
 
 
-with open('output.txt', 'w') as f_out:
-    df = pd.read_csv('digits.csv')
+if __name__ == "__main__":
+    with open('output.txt', 'w') as f_out:
+        df = pd.read_csv('digits.csv')
 
-    X = df.ix[:, :-1]
-    y = df.ix[:, -1]
+        X = df.ix[:, :-1]
+        y = df.ix[:, -1]
 
-    clf = MLNNClassifier(random_state=0)
-    clf.fit(X, y)
-    y_pred = clf.predict(X)
+        clf = MLNNClassifier(random_state=0)
+        clf.fit(X, y)
+        y_pred = clf.predict(X)
 
-    # ================ YOUR CODE HERE ================
-    # Print a blank line and the corresponding confusion matrix.
-    # ================================================
+        # ================ YOUR CODE HERE ================
+        # Print a blank line and the corresponding confusion matrix.
+        # ================================================
