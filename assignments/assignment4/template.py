@@ -124,8 +124,6 @@ class SLNNClassifier(object):
 
     Parameters
     ----------
-    hidden_dim : list, optional (default=100)
-        Number of units per hidden layer.
     batch_size : int, optional (default=100)
         Size of minibatches.
     learning_rate : float, optional (default=0.01)
@@ -167,7 +165,7 @@ class SLNNClassifier(object):
            Data." AMLBook, 2012.
     """
 
-    def __init__(self, hidden_dim=100, batch_size=100, learning_rate=0.01,
+    def __init__(self, batch_size=100, learning_rate=0.01,
                  max_iter=500, random_state=None):
         self.hidden_dim = hidden_dim
         self.learning_rate = learning_rate
