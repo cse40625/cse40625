@@ -32,36 +32,9 @@ def digit_recognition(maxacts, i=None):
                                  'output_digit_maxacts_{:05d}.png'.format(i)))
 
 
-def hidden_recognition(maxacts, i=None):
-    """Visualize learned maximum activations (maxacts).
-
-    Each maxact is a vector corresponding to one class (digit). The vector
-    represents the features that produced the maximum activation of the output
-    unit in the neural network that corresponds to the class.
-
-    Parameters
-    ----------
-    maxacts : array, shape = [n_classes, n_features]
-    """
-    N = maxacts.shape[0]
-    for n in range(N):
-        plt.subplot(10, N/10, n+1)
-        plt.imshow(maxacts[n].reshape(8, 8), cmap='gray', interpolation='none')
-        plt.axis('off')
-    if not i:
-        plt.savefig('output_hidden_maxacts.png')
-    else:
-        if not os.path.exists('output_hidden_frames'):
-            os.makedirs('output_hidden_frames')
-        plt.savefig(os.path.join('output_hidden_frames',
-                                 'output_hidden_maxacts_{:05d}.png'.format(i)))
-
-
 def run_model(clf, max_iter_img, max_iter_step):
     # Iterate over each class.
     for c in range(len(clf.classes_)):
-        maxacts_c = []
-
         digit = np.zeros((clf.batch_size, len(clf.classes_)))
         digit[:, c] = 1
 
@@ -100,6 +73,8 @@ def run_model(clf, max_iter_img, max_iter_step):
                 else:
                     maxacts_c = np.dstack((maxacts_c, activations[0][0]))
                 n += 1
+
+        # Append to the maximum activations for each iteration.
         if c == 0:
             maxacts = maxacts_c
         else:
