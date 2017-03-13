@@ -10,7 +10,7 @@ from multilayer_neuralnet import MLNNClassifier
 def digit_recognition(maxacts):
     """Visualize learned maximum activations (maxacts).
 
-    Each maxacts is a vector corresponding to one class (digit). The vector
+    Each maxact is a vector corresponding to one class (digit). The vector
     represents the features that produced the maximum activation of the output
     unit in the neural network that corresponds to the class.
 
