@@ -40,6 +40,7 @@ if __name__ == "__main__":
     input_img_data = np.mean(X, axis=0).values.reshape((1, 64))  # mean of data
 
     maxacts = np.zeros((len(clf.classes_), X.shape[1]))
+    batch_size = clf.batch_size
 
     # Iterate over each class.
     for c in range(len(clf.classes_)):
