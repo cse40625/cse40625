@@ -339,9 +339,14 @@ class MLNNClassifier(object):
 
         Given the learning rate and gradient of the error, the updated weight
         vector w can be computed as:
-            w_{i+1} = w_i - learning_rate * grad,
+            w_i = w_i - learning_rate * grad,
         where i is the ith layer. This adjusts the weight vector in the
         direction of negative error proportional to the learning rate.
+
+        L2 regularization is performed by adding a component to the gradient
+        that is proportional to (and in the negative direction of) the weights:
+            grad = grad + ((2 * lambda) / N) * w_i,
+        where lambda is a regularization parameter.
 
         Parameters
         ----------
@@ -358,7 +363,9 @@ class MLNNClassifier(object):
             Size of minibatches.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Update the weights at each layer.
+        # Instructions: Update the weights at each layer, based on the gradient
+        # of the error. Add an L2 regularization penalty term to the gradient
+        # with a lambda of 1.0 before using the gradient to update the weights.
         # ================================================
 
     def fit(self, X, y):
