@@ -199,7 +199,7 @@ class SLNNClassifier(object):
 
         Using the softmax activation as the output layer, our neural network
         applies h(x) = (w_k.T \dot x_n) to compute the likelihood function:
-            P(Y=k|X=x_n, w) = \prod_N (exp(h(x)) / \sum_K exp(h(x)))
+            P(Y=k|X=x_n, w) = \prod_N (exp(h(x)) / \sum_K exp(h(x))),
         where K is the number of target classes, N is the number of instances,
         w are the weights, and the dot product is denoted by \dot.
 
