@@ -43,7 +43,7 @@ if __name__ == "__main__":
     input_img_data = np.mean(X, axis=0).values.reshape((1, 64))
     maxacts = np.zeros((len(clf.classes_), X.shape[1]))
 
-    # Iterate over each class
+    # Iterate over each class.
     for c in range(len(clf.classes_)):
         digit = np.zeros((batch_size, len(clf.classes_)))
         digit[:, c] = 1
