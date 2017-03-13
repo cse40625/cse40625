@@ -133,6 +133,8 @@ class MLNNClassifier(object):
         Learning rate for weight updates.
     max_iter : int, optional (default=500)
         Maximum number of iterations.
+    reg_lambda : float, optional (default=1.0)
+        L2 regularization term on weights.
     random_state : int or None, optional (default=None)
         State or seed for random number generator.
 
@@ -174,11 +176,12 @@ class MLNNClassifier(object):
     """
 
     def __init__(self, hidden_dim=(100,), batch_size=100, learning_rate=0.01,
-                 max_iter=500, random_state=None):
+                 max_iter=500, reg_lambda=1.0, random_state=None):
         self.hidden_dim = hidden_dim
         self.learning_rate = learning_rate
         self.batch_size = batch_size
         self.max_iter = max_iter
+        self.reg_lambda = reg_lambda
         self.random_state = random_state
 
     def _initialize(self, layer_dim):
