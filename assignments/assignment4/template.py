@@ -114,7 +114,7 @@ class SLNNClassifier(object):
         Size of minibatches.
     learning_rate : float, optional (default=0.01)
         Learning rate for weight updates.
-    max_iter : int, optional, optional (default=500)
+    max_iter : int, optional (default=500)
         Maximum number of iterations.
     random_state : int or None, optional (default=None)
         State or seed for random number generator.
@@ -199,7 +199,7 @@ class SLNNClassifier(object):
 
         Using the softmax activation as the output layer, our neural network
         applies h(x) = (w_k.T \dot x_n) to compute the likelihood function:
-            P(Y=k |X=x_n, w) = \prod_N (exp(h(x)) / \sum_K exp(h(x)))
+            P(Y=k|X=x_n, w) = \prod_N (exp(h(x)) / \sum_K exp(h(x)))
         where K is the number of target classes, N is the number of instances,
         w are the weights, and the dot product is denoted by \dot.
 
@@ -208,7 +208,7 @@ class SLNNClassifier(object):
             E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(w_k.T \dot x_n)),
         which can be minimized by computing the gradient:
             grad = -\sum_N (x_n * (1 - P(Y=k |X=x_n, w)),
-        where P(Y=k |X=x_n, w) is the likelihood function.
+        where P(Y=k|X=x_n, w) is the likelihood function.
 
         Parameters
         ----------

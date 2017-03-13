@@ -131,7 +131,7 @@ class MLNNClassifier(object):
         Size of minibatches.
     learning_rate : float, optional (default=0.01)
         Learning rate for weight updates.
-    max_iter : int, optional, optional (default=500)
+    max_iter : int, optional (default=500)
         Maximum number of iterations.
     random_state : int or None, optional (default=None)
         State or seed for random number generator.
@@ -204,8 +204,8 @@ class MLNNClassifier(object):
         """Initialize weights.
 
         This implementation uses normalized initialization, where weights W
-        are initialized by randomly sampling from a uniform distribution over
-            [-sqrt(6) / sqrt(n_j + n_{j+1}), sqrt(6) / sqrt(n_j + n_{j+1})]
+        are initialized by randomly sampling from a uniform distribution over:
+            [-sqrt(6) / sqrt(n_j + n_{j+1}), sqrt(6) / sqrt(n_j + n_{j+1})],
         where n_j and n_{j+1} are the fan in and fan out, respectively.
 
         Parameters
@@ -271,11 +271,11 @@ class MLNNClassifier(object):
         applied to s_L.
 
         The sensitivities from layers l = L-1 to 1 are backpropagated as:
-            delta_l = 2 * theta'(s_l) \mat [W_{l+1} \dot delta_{l+1}],
+            delta_l = 2 * theta'(s_l) \times [W_{l+1} \dot delta_{l+1}],
         where s_l is the dot product of the weights at layer l and activations
         at layer l-1, W_{l+1} is the weights at layer l+1, and theta'(s_l) is
         the derivative of the output transformation applied to s_l. Matrix
-        multiplication is denoted by \mat and the dot product is denoted by
+        multiplication is denoted by \times and the dot product is denoted by
         \dot.
 
         Parameters
@@ -304,7 +304,7 @@ class MLNNClassifier(object):
     def _compute_gradient(self, activations, deltas, batch_size):
         """Compute the gradient.
 
-        For each instance x_n (in the batch), the gradient is computed as
+        For each instance x_n (in the batch), the gradient is computed as:
             G_l(x_n) = [x_{l-1} \dot (delta_l).T]
             G_l = G_l + 1/N * G_l(x_n),
         where x_l is the activations at layer l, delta_l is the sensitivities
