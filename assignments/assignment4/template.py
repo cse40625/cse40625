@@ -165,7 +165,7 @@ class SLNNClassifier(object):
         W = np.random.uniform(-.5, .5, (fan_in, fan_out))
         return W
 
-    def _forward_pass(self, activations):
+    def _forward_pass(self, X):
         """Feed forward.
 
         Perform a forward pass on the network by computing the values of the
@@ -182,13 +182,13 @@ class SLNNClassifier(object):
 
         Parameters
         ----------
-        activations : array, shape = [batch_size, n_features]
+        X : array, shape = [batch_size, n_features]
             Initial activations.
 
         Returns
         -------
-        activations : array, shape = [batch_size, n_features]
-            Computed network activations.
+        outputs : array, shape = [batch_size, n_features]
+            Computed network outputs.
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Compute and return the activations at each layer.
@@ -217,7 +217,7 @@ class SLNNClassifier(object):
         y : array, shape = [batch_size, n_classes]
             Target values.
         activations : array, shape = [batch_size, n_features]
-            Activations.
+            Output activations.
         batch_size : int
             Size of minibatches.
 
@@ -248,7 +248,7 @@ class SLNNClassifier(object):
         y : array, shape = [batch_size, n_classes]
             Target values.
         activations : array, shape = [batch_size, n_features]
-            Activations.
+            Output activations.
         batch_size : int
             Size of minibatches.
         """

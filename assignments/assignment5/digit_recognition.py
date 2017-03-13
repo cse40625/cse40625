@@ -37,8 +37,8 @@ def run_model(clf, max_iter, max_iter_step):
 
     # Iterate over each class.
     for c in range(len(clf.classes_)):
-        digit = np.zeros((clf.batch_size, len(clf.classes_)))
-        digit[:, c] = 1
+        digits = np.zeros((clf.batch_size, len(clf.classes_)))
+        digits[:, c] = 1
 
         layer_dim = ([X.shape[1]] + list(clf.hidden_dim) + [clf.n_outputs_])
 
@@ -52,14 +52,11 @@ def run_model(clf, max_iter, max_iter_step):
         # Run gradient descent.
         for i in range(max_iter):
             activations = clf._forward_pass(activations)
-            deltas = clf._backprop(digit, activations, deltas)
+            deltas = clf._backprop(digits, activations, deltas)
 
             # Compute the sensitivities and gradients for the image layer.
             deltas_x = np.dot(deltas[0], clf.weight_[0].T)
             grad = activations[0][0] * deltas_x[0]
-
-            # Apply L2 regularization (weight decay).
-            #grad += ((2 * reg_lambda) / batch_size) * activations[0][0]
 
             # Apply weight elimination.
             grad += ((2 * reg_lambda) / clf.batch_size) * \
