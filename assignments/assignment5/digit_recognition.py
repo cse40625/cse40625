@@ -38,9 +38,9 @@ if __name__ == "__main__":
     clf = MLNNClassifier(max_iter=max_iter)
     clf.fit(X, y)
 
-    # Generate a gray image with some noise.
-    #input_img_data = np.random.random((1, 64)) * 16
-    input_img_data = np.mean(X, axis=0).values.reshape((1, 64))
+    #input_img_data = np.random.random((1, 64)) * 16  # gray image with noise
+    input_img_data = np.mean(X, axis=0).values.reshape((1, 64))  # mean of data
+
     maxacts = np.zeros((len(clf.classes_), X.shape[1]))
 
     # Iterate over each class.
