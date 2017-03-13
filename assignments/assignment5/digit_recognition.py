@@ -98,8 +98,8 @@ if __name__ == "__main__":
     clf = MLNNClassifier(max_iter=max_iter)
     clf.fit(X, y)
 
-    #input_img_data = np.random.random((1, 64)) * 16 # gray image with noise
-    input_img_data = np.mean(X, axis=0).values.reshape((1, 64)) # mean of data
+    #input_img_data = np.random.random((1, 64)) * 16  # gray image with noise
+    input_img_data = np.mean(X, axis=0).values.reshape((1, 64))  # mean of data
 
     maxacts = run_model(clf, max_iter_imgs, max_iter_step)
     if make_gif:
