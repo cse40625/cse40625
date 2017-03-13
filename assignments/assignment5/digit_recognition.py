@@ -107,6 +107,7 @@ def run_model(clf, max_iter_img, max_iter_step):
 
     return maxacts
 
+
 if __name__ == "__main__":
     max_iter = 1000
     max_iter_imgs = 10001
