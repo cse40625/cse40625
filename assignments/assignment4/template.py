@@ -207,7 +207,7 @@ class SLNNClassifier(object):
         multinomial logistic error (also known as the cross-entropy error):
             E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(w_k.T \dot x_n)),
         which can be minimized by computing the gradient:
-            grad = -\sum_N (x_n * (1 - P(Y=k |X=x_n, w)),
+            grad = -\sum_N (x_n * (1 - P(Y=k|X=x_n, w)),
         where P(Y=k|X=x_n, w) is the likelihood function.
 
         Parameters
