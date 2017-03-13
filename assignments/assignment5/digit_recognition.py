@@ -46,8 +46,10 @@ if __name__ == "__main__":
     for c in range(len(clf.classes_)):
         digit = np.zeros((batch_size, len(clf.classes_)))
         digit[:, c] = 1
+
         layer_dim = ([X.shape[1]] + list(clf.hidden_dim) + [clf.n_outputs_])
 
+        # Initialize the activations and deltas for the image layer.
         activations = [np.repeat(input_img_data, batch_size, axis=0)]
         for i in range(clf.n_layers_ - 1):
             activations.append(np.empty((batch_size, layer_dim[i + 1])))
@@ -61,7 +63,11 @@ if __name__ == "__main__":
             # Compute the sensitivities and gradients for the image layer.
             deltas_x = np.dot(deltas[0], clf.weight_[0].T)
             grad = activations[0][0] * deltas_x[0]
+
+            # Apply L2 regularization (weight decay).
             #grad += ((2 * reg_lambda) / batch_size) * activations[0][0]
+
+            # Apply weight elimination.
             grad += ((2 * reg_lambda) / batch_size) * \
                     ((activations[0][0]) / (1 + activations[0][0] ** 2) ** 2)
 
