@@ -69,8 +69,8 @@ def label_binarize(y):
     return y_bin
 
 
-def tanh(X):
-    """Compute the hyperbolic tangent (tanh) function inplace.
+def softmax(X):
+    """Compute the K-way softmax function inplace.
 
     Parameters
     ----------
@@ -82,24 +82,11 @@ def tanh(X):
     X_new : array, shape = [n_instances, n_features]
         The transformed data.
     """
-    return np.tanh(X, out=X)
+    tmp = X - X.max(axis=1)[:, np.newaxis]
+    np.exp(tmp, out=X)
+    X /= X.sum(axis=1)[:, np.newaxis]
 
-
-def tanh_derivative(Z):
-    """Apply the derivative of the hyperbolic tangent (tanh) function.
-
-    Parameters
-    ----------
-    Z : array, shape = [n_instances, n_features]
-        The data that was output from the hyperbolic tangent activation
-        function during the forward pass.
-
-    Returns
-    -------
-    Z_new : array, shape = [n_instances, n_features]
-        The transformed data.  
-    """
-    return (1 - Z ** 2)
+    return X
 
 
 class SLNNClassifier(object):
@@ -108,19 +95,18 @@ class SLNNClassifier(object):
     A neural network is a system of interconnected "neurons" that can compute
     values from inputs by feeding information through the network. A single
     neuron can be modeled as a perceptron [1] or "logistic unit" through which
-    a series of features and associated weights are passed. The output of 
-    neurons at at the first layer are used as the input to neurons in a hidden
-    layer. The output of the network is computed by applying an output
-    transformation to the inputs of the hidden layer of neurons.
+    a series of features and associated weights are passed. In a single-layer
+    neural network, the output of the network is computed by applying an output
+    transformation to the inputs.
 
     The classifier trains iteratively. At each iteration, the partial
     derivatives of the loss function with respect to the model parameters are
-    computed to update the parameters. These partial derivatives are then
-    propagated backwards ("backpropagated") through the network [2, 3].
+    computed to update the parameters.
 
-    This implementation uses a hyperbolic tangent activation function and
-    output transformation and optimizes the squared loss function using
-    (minibatch) stochastic gradient descent [4].
+    This implementation uses a softmax output transformation, and optimizes
+    the multinomial logistic loss (also known as the cross-entropy loss) using
+    (minibatch) stochastic gradient descent. This is equivalent to a neural
+    network-based implementation of multinomial logistic regression [2].
 
     Parameters
     ----------
@@ -137,14 +123,10 @@ class SLNNClassifier(object):
     ----------
     classes_ : array, shape = [n_classes,]
         Class labels for each output.
-    weight_ : list, length n_layers - 1
-        Weights for each layer. The ith element in the list represents the
-        weight matrix corresponding to layer i.
-    bias_ : list, length n_layers - 1
-        Biases for each layer. The ith element in the list represents the bias
-        vector corresponding to layer i + 1.
-    n_layers_ : int
-        Number of layers.
+    weight_ : array, shape = [n_features, n_classes]
+        Weights.
+    bias_ : array, shape = [1, n_classes]
+        Biases.
     n_outputs_ : int
         Number of outputs.
 
@@ -154,20 +136,12 @@ class SLNNClassifier(object):
            Information Storage and Organization in the Brain." Psychological
            Review 65 (6): 386-408, 1958.
 
-    .. [2] P. Werbos. "Beyond Regression: New Tools for Prediction and Analysis 
-           in the Behavioral Sciences." PhD Dissertation, Harvard University,
-           Cambridge, 1975.
-
-    .. [3] G. E. Hinton. "Connectionist Learning Procedures." Artificial
-           Intelligence 40 (1-3): 185-234, 1989.
-
-    .. [4] Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from
-           Data." AMLBook, 2012.
+    .. [2] C. M. Bishop. "Pattern Recognition and Machine Learning." Springer,
+           2006.
     """
 
-    def __init__(self, batch_size=100, learning_rate=0.01,
-                 max_iter=500, random_state=None):
-        self.hidden_dim = hidden_dim
+    def __init__(self, batch_size=100, learning_rate=0.01, max_iter=500,
+                 random_state=None):
         self.learning_rate = learning_rate
         self.batch_size = batch_size
         self.max_iter = max_iter
@@ -195,7 +169,7 @@ class SLNNClassifier(object):
         """Feed forward.
 
         Perform a forward pass on the network by computing the values of the
-        activations (neurons) in the hidden layers and the output layer.
+        activations (neurons) in the output layer.
 
         The activations are initialized as input x_in. The activations of the
         output layer are computed as:
@@ -208,78 +182,42 @@ class SLNNClassifier(object):
 
         Parameters
         ----------
-        activations : list, length = n_layers - 1
-            Activations for each layer. The ith element of the list holds the
-            values of the ith layer.
+        activations : array, shape = [batch_size, n_features]
+            Initial activations.
 
         Returns
         -------
-        activations : list, length = n_layers - 1
+        activations : array, shape = [batch_size, n_features]
             Computed network activations.
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Compute and return the activations at each layer.
         # ================================================
 
-    def _backprop(self, y, activations, deltas):
-        """Backpropagation to compute sensitivities at each layer.
-
-        The sensitivities are computed from the loss function and its
-        corresponding derivatives with respect to the weight and bias vectors.
-        This implementation uses the hyperbolic tangent (tanh) function as the
-        output transformation and computes the derivatives accordingly.
-
-        The sensitivities at the final layer, L, are computed as:
-            delta_L = 2 * (x_L - y) * theta'(s_L),
-        where x_L is the activations at layer L, y is the target values, s_L is
-        the dot product of the weights at layer L and the activations at layer
-        L-1, and theta'() is the derivative of the output transformation
-        applied to s_L.
-
-        Parameters
-        ----------
-        y : array, shape = [n_instances, n_targets]
-            Target values.
-        activations : list, length = n_layers - 1
-            Activations for each layer. The ith element of the list holds the
-            values of the ith layer.
-        deltas : list, length = n_layers - 1
-            Sensitivities for each layer. The ith element of the list holds the
-            difference between the activations of the i + 1 layer and the
-            backpropagated error. The sensitivities are gradients of loss with 
-            respect to z in each layer, where z = wx + b is the value of a
-            particular layer before passing through the activation function.
-
-        Returns
-        -------
-        deltas : array, shape = [n_weights,]
-            Gradient of the error.
-        """
-        # ================ YOUR CODE HERE ================
-        # Instructions: Compute and return the sensitivities at each layer.
-        # ================================================
-
-    def _compute_gradient(self, activations, deltas, batch_size):
+    def _compute_gradient(self, X, y, activations, batch_size):
         """Compute the gradient.
 
-        For each instance x_n (in the batch), the gradient is computed as
-            G(x_n) = [x \dot delta.T]
-            G = G + 1/N * G(x_n),
-        where x is the input activations, delta is the sensitivities, N is
-        the number of instances (in the batch), and the dot product is denoted
-        by \dot.
+        Using the softmax activation as the output layer, our neural network
+        applies h(x) = (w_k.T \dot x_n) to compute the likelihood function:
+            P(Y=k |X=x_n, w) = \prod_N (exp(h(x)) / \sum_K exp(h(x)))
+        where K is the number of target classes, N is the number of instances,
+        w are the weights, and the dot product is denoted by \dot.
+
+        Using the softmax activation, the neural network minimizes the
+        multinomial logistic error (also known as the cross-entropy error):
+            E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(w_k.T \dot x_n)),
+        which can be minimized by computing the gradient:
+            grad = -\sum_N (x_n * (1 - P(Y=k |X=x_n, w)),
+        where P(Y=k |X=x_n, w) is the likelihood function.
 
         Parameters
         ----------
-        activations : list, length = n_layers - 1
-            Activations for each layer. The ith element of the list holds the
-            values of the ith layer.
-        deltas : list, length = n_layers - 1
-            Sensitivities for each layer. The ith element of the list holds the
-            difference between the activations of the i + 1 layer and the
-            backpropagated error. The sensitivities are gradients of loss with 
-            respect to z in each layer, where z = wx + b is the value of a
-            particular layer before passing through the activation function.
+        X : array, shape = [batch_size, n_features]
+            Training data.
+        y : array, shape = [batch_size, n_classes]
+            Target values.
+        activations : array, shape = [batch_size, n_features]
+            Activations.
         batch_size : int
             Size of minibatches.
 
@@ -292,26 +230,25 @@ class SLNNClassifier(object):
         # Instructions: Compute and return the gradient.
         # ================================================
 
-    def _update_weight(self, activations, deltas, batch_size):
+    def _update_weight(self, X, y, activations, batch_size):
         """Updates the weight vector.
 
         Given the learning rate and gradient of the error, the updated weight
         vector w can be computed as:
-            w_{i+1} = w_i - learning_rate * grad,
-        where i is the ith layer. This adjusts the weight vector in the
-        direction of negative error proportional to the learning rate.
+            w = w - learning_rate * grad.
+        This adjusts the weight vector in the direction of negative error
+        proportional to the learning rate.
 
         Parameters
         ----------
-        activations : list, length = n_layers - 1
-            Activations for each layer. The ith element of the list holds the
-            values of the ith layer.
-        deltas : list, length = n_layers - 1
-            Sensitivities for each layer. The ith element of the list holds the
-            difference between the activations of the i + 1 layer and the
-            backpropagated error. The sensitivities are gradients of loss with 
-            respect to z in each layer, where z = wx + b is the value of a
-            particular layer before passing through the activation function.
+        Parameters
+        ----------
+        X : array, shape = [batch_size, n_features]
+            Training data.
+        y : array, shape = [batch_size, n_classes]
+            Target values.
+        activations : array, shape = [batch_size, n_features]
+            Activations.
         batch_size : int
             Size of minibatches.
         """
@@ -326,7 +263,7 @@ class SLNNClassifier(object):
         ----------
         X : array, shape = [n_instances, n_features]
             Training data.
-        y : array, shape = [n_instances, n_targets]
+        y : array, shape = [n_instances, n_classes]
             Target values.
 
         Returns
@@ -337,24 +274,22 @@ class SLNNClassifier(object):
         np.random.seed(seed=self.random_state)
 
         n_instances, n_features = X.shape
+        batch_size = min(self.batch_size, n_instances)
 
         self.classes_ = np.unique(y)
         self.n_outputs_ = len(self.classes_)
 
         y_bin = label_binarize(y)
 
-        batch_size = min(self.batch_size, n_instances)
-
-        hidden_dim = self.hidden_dim
-        n_outputs_ = self.n_outputs_
-
         # ================ YOUR CODE HERE ================
-        # Instructions: Fit the single-layer neural network. Iterate up to
-        # max_iter times. Each iteration, feed forward the input, backpropagate
-        # the partial derivatives computed with respect to the loss function,
-        # and update the weights. Using the updated weight vector, generate
-        # predictions for the target class. Every fifty iterations, print the
-        # current model accuracy.
+        # Instructions: Fit the single-layer neural network. Initialize the
+        # weights with random samples drawn from a uniform distribution over
+        # [-0.5, 0.5). Initialize the bias terms to 1. Iterate up to max_iter
+        # times. Each iteration, perform the following steps with batches of
+        # 100 instances at a time: feed forward the input, compute the gradient
+        # of the loss function, and update the weights with the gradient. Every
+        # 50 iterations, use the updated weight vector to generate predictions
+        # for the target class and print the current model accuracy.
         # ================================================
 
     def predict(self, X):
@@ -371,7 +306,7 @@ class SLNNClassifier(object):
             Predicted target value for instances.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Use the final activations to decide the predicted
+        # Instructions: Use the output activations to decide the predicted
         # target value. Predict the target value with the highest activation.
         # ================================================
 

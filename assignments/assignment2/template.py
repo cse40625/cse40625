@@ -63,7 +63,7 @@ class LogisticRegression(object):
     def _compute_gradient(self, X, y):
         """Compute the gradient for the logistic regression error.
 
-        Logistic regression minimizes cross-entropy error:
+        Logistic regression minimizes binomial cross-entropy error:
             E(w) = 1/N \sum_N ln(1 + exp(y_n * w.T \dot x_n)),
         which can be minimized by computing the gradient:
             grad = -1/N \sum_N ((y_n * x_n) / (1 + exp(y_n * w.T \dot x_n))),
@@ -74,7 +74,7 @@ class LogisticRegression(object):
         ----------
         X : array, shape = [n_instances, n_features + 1]
             Training data.
-        y : array, shape = [n_instances, n_targets]
+        y : array, shape = [n_instances, n_classes]
             Target values (assumed to be {-1, 1}).
 
         Returns
@@ -132,7 +132,7 @@ class LogisticRegression(object):
         ----------
         X : array, shape = [n_instances, n_features]
             Training data.
-        y : array, shape = [n_instances, n_targets]
+        y : array, shape = [n_instances, n_classes]
             Target values (assumed to be {-1, 1}).
 
         Returns

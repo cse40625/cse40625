@@ -280,7 +280,7 @@ class MLNNClassifier(object):
 
         Parameters
         ----------
-        y : array, shape = [n_instances, n_targets]
+        y : array, shape = [n_instances, n_classes]
             Target values.
         activations : list, length = n_layers - 1
             Activations for each layer. The ith element of the list holds the
@@ -368,7 +368,7 @@ class MLNNClassifier(object):
         ----------
         X : array, shape = [n_instances, n_features]
             Training data.
-        y : array, shape = [n_instances, n_targets]
+        y : array, shape = [n_instances, n_classes]
             Target values.
 
         Returns
@@ -392,12 +392,14 @@ class MLNNClassifier(object):
         self._initialize(layer_dim)
 
         # ================ YOUR CODE HERE ================
-        # Instructions: Fit the multi-layer neural network. Iterate up to
-        # max_iter times. Each iteration, feed forward the input, backpropagate
-        # the partial derivatives computed with respect to the loss function,
-        # and update the weights. Using the updated weight vector, generate
-        # predictions for the target class. Every fifty iterations, print the
-        # current model accuracy.
+        # Instructions: Fit the multi-layer neural network. Initialize the
+        # weights using normalized initialization. Initialize the bias terms to
+        # 1. Iterate up to max_iter times. Each iteration, perform the
+        # following steps with batches of 100 instances at a time: feed forward
+        # the input, backpropagate the partial derivatives computed with
+        # respect to the loss function, and update the weights. Every 50
+        # iterations, use the updated weight vector to generate predictions for
+        # the target class and print the current model accuracy.
         # ================================================
 
     def predict(self, X):
@@ -414,7 +416,7 @@ class MLNNClassifier(object):
             Predicted target value for instances.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Use the final activations to decide the predicted
+        # Instructions: Use the output activations to decide the predicted
         # target value. Predict the target value with the highest activation.
         # ================================================
 

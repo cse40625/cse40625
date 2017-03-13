@@ -108,7 +108,7 @@ class Perceptron(object):
         ----------
         X : array, shape = [n_instances, n_features]
             Training data.
-        y : array, shape = [n_instances, n_targets]
+        y : array, shape = [n_instances, n_classes]
             Target values (assumed to be {-1, 1}).
 
         Returns
