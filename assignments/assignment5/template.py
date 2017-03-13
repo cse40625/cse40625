@@ -222,7 +222,7 @@ class MLNNClassifier(object):
         """
         init_bound = np.sqrt(6. / (fan_in + fan_out))
         W = np.random.uniform(-init_bound, init_bound,
-                                  (fan_in, fan_out))
+                              (fan_in, fan_out))
         return W
 
     def _forward_pass(self, activations):
