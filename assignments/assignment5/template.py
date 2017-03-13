@@ -107,7 +107,7 @@ class MLNNClassifier(object):
 
     A multi-layer neural network is a system of interconnected "neurons" that
     can compute values from inputs by feeding information through the network.
-    A single neuron can be modeled as a perceptron [1] or "logistic unit"
+    A single neuron can be modeled as a perceptron [1] or "activation unit"
     through which a series of features and associated weights are passed. The
     output of neurons at earlier layers are used as the input to neurons at
     later ones. The output of the network is computed by applying an output
