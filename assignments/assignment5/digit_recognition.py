@@ -32,7 +32,9 @@ def digit_recognition(maxacts, i=None):
                                  'output_digit_maxacts_{:05d}.png'.format(i)))
 
 
-def run_model(clf, max_iter_img, max_iter_step):
+def run_model(clf, max_iter, max_iter_step):
+    maxacts = None
+
     # Iterate over each class.
     for c in range(len(clf.classes_)):
         digit = np.zeros((clf.batch_size, len(clf.classes_)))
@@ -46,9 +48,9 @@ def run_model(clf, max_iter_img, max_iter_step):
             activations.append(np.empty((clf.batch_size, layer_dim[i + 1])))
         deltas = [np.empty_like(a_layer) for a_layer in activations]
 
+        maxacts_c = None
         # Run gradient descent.
-        n = 0
-        for i in range(max_iter_img):
+        for i in range(max_iter):
             activations = clf._forward_pass(activations)
             deltas = clf._backprop(digit, activations, deltas)
 
@@ -68,14 +70,13 @@ def run_model(clf, max_iter_img, max_iter_step):
 
             if i % max_iter_step == 0:
                 # Append the image to the maximum activations for the class.
-                if n == 0:
+                if maxacts_c is None:
                     maxacts_c = activations[0][0]
                 else:
                     maxacts_c = np.dstack((maxacts_c, activations[0][0]))
-                n += 1
 
         # Append to the maximum activations for each iteration.
-        if c == 0:
+        if maxacts is None:
             maxacts = maxacts_c
         else:
             maxacts = np.vstack((maxacts, maxacts_c))
