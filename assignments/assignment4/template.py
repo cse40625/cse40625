@@ -323,5 +323,5 @@ if __name__ == "__main__":
         y_pred = clf.predict(X)
 
         # ================ YOUR CODE HERE ================
-        # Print a blank line and the corresponding confusion matrix.
+        # Instructions: Print a blank line and final confusion matrix.
         # ================================================
