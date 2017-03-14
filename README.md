@@ -14,5 +14,6 @@ Collection of resources for Notre Dame CSE Machine Learning course (CSE 40625).
 
 ### References
 * Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "[Learning from Data](http://amlbook.com/)." AMLBook, 2012.
-* T. Mitchell. "[Machine Learning](http://www.cs.cmu.edu/~tom/mlbook.html)." McGraw Hill, 1997.
 * T. Hastie, R. Tibshirani, and J. Friedman. "[The Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/)." Springer, 2009.
+* C. M. Bishop. "[Pattern Recognition and Machine Learning](http://www.springer.com/us/book/9780387310732)." Springer, 2006.
+* T. Mitchell. "[Machine Learning](http://www.cs.cmu.edu/~tom/mlbook.html)." McGraw Hill, 1997.
