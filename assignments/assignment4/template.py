@@ -283,9 +283,9 @@ class SLNNClassifier(object):
         # weights and biases with random samples drawn from a uniform
         # distribution over [-0.5, 0.5). Iterate up to max_iter times. Each
         # iteration: feed forward the input, compute the gradient of the loss
-        # function, and update the weights with the gradient. Every 50
-        # iterations, use the updated weight vector to generate predictions for
-        # the target class and print the current model accuracy.
+        # function, and update the weights and biases with the gradient. Every
+        # 50 iterations, use the updated parameters to generate predictions
+        # for the target class and print the current model accuracy.
         # ================================================
 
     def predict(self, X):

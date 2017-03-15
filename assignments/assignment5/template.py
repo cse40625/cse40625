@@ -436,9 +436,9 @@ class MLNNClassifier(object):
         # max_iter times. Each iteration, perform the following steps with
         # batches of 100 instances at a time: feed forward the input,
         # backpropagate the partial derivatives computed with respect to the
-        # loss function, and update the weights. Every 50 iterations, use the
-        # updated weight vector to generate predictions for the target class
-        # and print the current model accuracy.
+        # loss function, and update the weights and biases. Every 50
+        # iterations, use the updated parameters to generate predictions for
+        # the target class and print the current model accuracy.
         # ================================================
 
     def predict(self, X):
