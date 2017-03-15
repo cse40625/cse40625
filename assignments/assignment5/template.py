@@ -201,8 +201,8 @@ class MLNNClassifier(object):
     def __init__(self, hidden_dim=(100,), batch_size=100, learning_rate=0.01,
                  max_iter=500, reg_lambda=1.0, random_state=None):
         self.hidden_dim = hidden_dim
-        self.learning_rate = learning_rate
         self.batch_size = batch_size
+        self.learning_rate = learning_rate
         self.max_iter = max_iter
         self.reg_lambda = reg_lambda
         self.random_state = random_state
