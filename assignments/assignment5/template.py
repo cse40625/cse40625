@@ -432,13 +432,13 @@ class MLNNClassifier(object):
 
         # ================ YOUR CODE HERE ================
         # Instructions: Fit the multi-layer neural network. Initialize the
-        # weights using normalized initialization. Initialize the bias terms to
-        # 1. Iterate up to max_iter times. Each iteration, perform the
-        # following steps with batches of 100 instances at a time: feed forward
-        # the input, backpropagate the partial derivatives computed with
-        # respect to the loss function, and update the weights. Every 50
-        # iterations, use the updated weight vector to generate predictions for
-        # the target class and print the current model accuracy.
+        # weights and biases using normalized initialization. Iterate up to
+        # max_iter times. Each iteration, perform the following steps with
+        # batches of 100 instances at a time: feed forward the input,
+        # backpropagate the partial derivatives computed with respect to the
+        # loss function, and update the weights. Every 50 iterations, use the
+        # updated weight vector to generate predictions for the target class
+        # and print the current model accuracy.
         # ================================================
 
     def predict(self, X):

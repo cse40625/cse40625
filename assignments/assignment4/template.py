@@ -280,13 +280,12 @@ class SLNNClassifier(object):
 
         # ================ YOUR CODE HERE ================
         # Instructions: Fit the single-layer neural network. Initialize the
-        # weights with random samples drawn from a uniform distribution over
-        # [-0.5, 0.5). Initialize the bias terms to 1. Iterate up to max_iter
-        # times. Each iteration, perform the following steps with batches of
-        # 100 instances at a time: feed forward the input, compute the gradient
-        # of the loss function, and update the weights with the gradient. Every
-        # 50 iterations, use the updated weight vector to generate predictions
-        # for the target class and print the current model accuracy.
+        # weights and biases with random samples drawn from a uniform
+        # distribution over [-0.5, 0.5). Iterate up to max_iter times. Each
+        # iteration: feed forward the input, compute the gradient of the loss
+        # function, and update the weights with the gradient. Every 50
+        # iterations, use the updated weight vector to generate predictions for
+        # the target class and print the current model accuracy.
         # ================================================
 
     def predict(self, X):
