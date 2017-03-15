@@ -101,7 +101,7 @@ class SLNNClassifier(object):
 
     The classifier trains iteratively. At each iteration, the partial
     derivatives of the loss function with respect to the model parameters are
-    computed to update the parameters.
+    computed. These gradients are then used to update the model parameters.
 
     This implementation uses a softmax output transformation, and optimizes
     the multinomial logistic loss (also known as the cross-entropy loss) using
@@ -110,8 +110,6 @@ class SLNNClassifier(object):
 
     Parameters
     ----------
-    batch_size : int, optional (default=100)
-        Size of minibatches.
     learning_rate : float, optional (default=0.01)
         Learning rate for weight updates.
     max_iter : int, optional (default=500)
@@ -140,15 +138,13 @@ class SLNNClassifier(object):
            2006.
     """
 
-    def __init__(self, batch_size=100, learning_rate=0.01, max_iter=500,
-                 random_state=None):
+    def __init__(self, learning_rate=0.01, max_iter=500, random_state=None):
         self.learning_rate = learning_rate
-        self.batch_size = batch_size
         self.max_iter = max_iter
         self.random_state = random_state
 
-    def _init_weight(self, fan_in, fan_out):
-        """Initialize weights.
+    def _init_parameters(self, fan_in, fan_out):
+        """Initialize weights and biases.
 
         Parameters
         ----------
@@ -161,9 +157,13 @@ class SLNNClassifier(object):
         -------
         W : array, shape = [fan_in, fan_out]
             Initialized weights.
+        b : array, shape = [1, fan_out]
+            Initialized biases.
         """
         W = np.random.uniform(-.5, .5, (fan_in, fan_out))
-        return W
+        b = np.random.uniform(-.5, .5, (1, fan_out))
+        self.weight_ = W
+        self.bias_ = b
 
     def _forward_pass(self, X):
         """Feed forward.
@@ -182,19 +182,19 @@ class SLNNClassifier(object):
 
         Parameters
         ----------
-        X : array, shape = [batch_size, n_features]
+        X : array, shape = [n_instances, n_features]
             Initial activations.
 
         Returns
         -------
-        outputs : array, shape = [batch_size, n_features]
+        outputs : array, shape = [n_instances, n_features]
             Computed network outputs.
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Compute and return the activations at each layer.
         # ================================================
 
-    def _compute_gradient(self, X, y, activations, batch_size):
+    def _compute_gradient(self, X, y, activations):
         """Compute the gradient.
 
         Using the softmax activation as the output layer, our neural network
@@ -212,25 +212,25 @@ class SLNNClassifier(object):
 
         Parameters
         ----------
-        X : array, shape = [batch_size, n_features]
+        X : array, shape = [n_instances, n_features]
             Training data.
-        y : array, shape = [batch_size, n_classes]
+        y : array, shape = [n_instances, n_classes]
             Target values.
-        activations : array, shape = [batch_size, n_features]
+        activations : array, shape = [n_instances, n_features]
             Output activations.
-        batch_size : int
-            Size of minibatches.
 
         Returns
         -------
-        grad : array, shape = [n_weights,]
-            Gradient of the error.
+        weight_grad : array, shape = [n_weights,]
+            Gradient of the error for the weights.
+        bias_grad : array, shape = [n_weights,]
+            Gradient of the error for the biases.
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Compute and return the gradient.
         # ================================================
 
-    def _update_weight(self, X, y, activations, batch_size):
+    def _update_weight(self, X, y, activations):
         """Updates the weight vector.
 
         Given the learning rate and gradient of the error, the updated weight
@@ -243,14 +243,12 @@ class SLNNClassifier(object):
         ----------
         Parameters
         ----------
-        X : array, shape = [batch_size, n_features]
+        X : array, shape = [n_instances, n_features]
             Training data.
-        y : array, shape = [batch_size, n_classes]
+        y : array, shape = [n_instances, n_classes]
             Target values.
-        activations : array, shape = [batch_size, n_features]
+        activations : array, shape = [n_instances, n_features]
             Output activations.
-        batch_size : int
-            Size of minibatches.
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Update the weights at each layer.
@@ -274,7 +272,6 @@ class SLNNClassifier(object):
         np.random.seed(seed=self.random_state)
 
         n_instances, n_features = X.shape
-        batch_size = min(self.batch_size, n_instances)
 
         self.classes_ = np.unique(y)
         self.n_outputs_ = len(self.classes_)

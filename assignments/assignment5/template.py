@@ -102,6 +102,26 @@ def tanh_derivative(Z):
     return (1 - Z ** 2)
 
 
+def softmax(X):
+    """Compute the K-way softmax function inplace.
+
+    Parameters
+    ----------
+    X : array, shape = [n_instances, n_features]
+        The input data.
+
+    Returns
+    -------
+    X_new : array, shape = [n_instances, n_features]
+        The transformed data.
+    """
+    tmp = X - X.max(axis=1)[:, np.newaxis]
+    np.exp(tmp, out=X)
+    X /= X.sum(axis=1)[:, np.newaxis]
+
+    return X
+
+
 class MLNNClassifier(object):
     """Multi-layer neural network classifier.
 
@@ -119,9 +139,12 @@ class MLNNClassifier(object):
     propagated backwards ("backpropagated") through the network [2, 3].
 
     This implementation uses a hyperbolic tangent activation function and
-    output transformation and optimizes the squared loss function using
-    (minibatch) stochastic gradient descent [4]. Weights are initialized using
-    normalized initialization [5].
+    softmax output transformation, and optimizes the cross-entropy loss
+    function using (minibatch) stochastic gradient descent. Weights and biases
+    are initialized using normalized initialization [4]. The output activation,
+    z, of each hidden layer is computed as z = theta(wx + b), where x is the
+    input activation, w is the weight vector, b is the bias term, and theta is
+    the activation function of the hidden layers [5].
 
     Parameters
     ----------
@@ -166,13 +189,13 @@ class MLNNClassifier(object):
     .. [3] G. E. Hinton. "Connectionist Learning Procedures." Artificial
            Intelligence 40 (1-3): 185-234, 1989.
 
-    .. [4] Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from
-           Data." AMLBook, 2012.
-
-    .. [5] X. Glorot and Y. Bengio. "Understanding the Difficulty of Training
+    .. [4] X. Glorot and Y. Bengio. "Understanding the Difficulty of Training
            Deep Feedforward Neural Networks." Proceedings of the 13th
            International Conference on Artificial Intelligence and Statistics
            (AISTATS), 2010.
+
+    .. [5] Y. S. Abu-Mostafa, M. Magdon-Ismail, and H-T Lin. "Learning from
+           Data." AMLBook, 2012.
     """
 
     def __init__(self, hidden_dim=(100,), batch_size=100, learning_rate=0.01,
@@ -199,15 +222,15 @@ class MLNNClassifier(object):
         self.weight_ = []
         self.bias_ = []
         for i in range(self.n_layers_ - 1):
-            W = self._init_weight(layer_dim[i], layer_dim[i + 1])
+            W, b = self._init_normalized(layer_dim[i], layer_dim[i + 1])
             self.weight_.append(W)
-            self.bias_.append(np.ones(layer_dim[i + 1]))
+            self.bias_.append(b)
 
-    def _init_weight(self, fan_in, fan_out):
-        """Initialize weights.
+    def _init_normalized(self, fan_in, fan_out):
+        """Initialize weights and biases using normalized initialization.
 
-        This implementation uses normalized initialization, where weights W
-        are initialized by randomly sampling from a uniform distribution over:
+        Normalized initialization performs initialization by randomly
+        sampling from a uniform distribution over:
             [-sqrt(6) / sqrt(n_j + n_{j+1}), sqrt(6) / sqrt(n_j + n_{j+1})],
         where n_j and n_{j+1} are the fan in and fan out, respectively.
 
@@ -222,11 +245,15 @@ class MLNNClassifier(object):
         -------
         W : array, shape = [fan_in, fan_out]
             Initialized weights.
+        b : array, shape = [1, fan_out]
+            Initialized biases.
         """
         init_bound = np.sqrt(6. / (fan_in + fan_out))
         W = np.random.uniform(-init_bound, init_bound,
                               (fan_in, fan_out))
-        return W
+        b = np.random.uniform(-init_bound, init_bound,
+                              (1, fan_out))
+        return W, b
 
     def _forward_pass(self, activations):
         """Feed forward.
@@ -264,20 +291,19 @@ class MLNNClassifier(object):
         The sensitivities are computed from the loss function and its
         corresponding derivatives with respect to the weight and bias vectors.
         This implementation uses the hyperbolic tangent (tanh) function as the
-        output transformation and computes the derivatives accordingly.
+        hidden transformation and the softmax function as the output
+        transformation, and computes the derivatives accordingly.
 
-        The sensitivities at the final layer, L, are computed as:
-            delta_L = 2 * (x_L - y) * theta'(s_L),
-        where x_L is the activations at layer L, y is the target values, s_L is
-        the dot product of the weights at layer L and the activations at layer
-        L-1, and theta'() is the derivative of the output transformation
-        applied to s_L.
+        Using a softmax output activation and cross-entropy error, the
+        sensitivities at the final layer, L, are computed as:
+            delta_L = x_L - y,
+        where x_L is the activations at layer L and y is the target values.
 
         The sensitivities from layers l = L-1 to 1 are backpropagated as:
             delta_l = 2 * theta'(s_l) \times [W_{l+1} \dot delta_{l+1}],
         where s_l is the dot product of the weights at layer l and activations
         at layer l-1, W_{l+1} is the weights at layer l+1, and theta'(s_l) is
-        the derivative of the output transformation applied to s_l. Matrix
+        the derivative of the hidden transformation applied to s_l. Matrix
         multiplication is denoted by \times and the dot product is denoted by
         \dot.
 
@@ -292,8 +318,8 @@ class MLNNClassifier(object):
             Sensitivities for each layer. The ith element of the list holds the
             difference between the activations of the i + 1 layer and the
             backpropagated error. The sensitivities are gradients of loss with 
-            respect to z in each layer, where z = wx + b is the value of a
-            particular layer before passing through the activation function.
+            respect to z in each layer, where z = theta(wx + b), where theta is
+            the activation function and z is the output of a particular layer.
 
         Returns
         -------
@@ -323,15 +349,17 @@ class MLNNClassifier(object):
             Sensitivities for each layer. The ith element of the list holds the
             difference between the activations of the i + 1 layer and the
             backpropagated error. The sensitivities are gradients of loss with 
-            respect to z in each layer, where z = wx + b is the value of a
-            particular layer before passing through the activation function.
+            respect to z in each layer, where z = theta(wx + b), where theta is
+            the activation function and z is the output of a particular layer.
         batch_size : int
             Size of minibatches.
 
         Returns
         -------
-        grad : array, shape = [n_weights,]
-            Gradient of the error.
+        weight_grad : array, shape = [n_weights,]
+            Gradient of the error for the weights.
+        bias_grad : array, shape = [n_weights,]
+            Gradient of the error for the biases.
         """
         # ================ YOUR CODE HERE ================
         # Instructions: Compute and return the gradient.
@@ -360,15 +388,16 @@ class MLNNClassifier(object):
             Sensitivities for each layer. The ith element of the list holds the
             difference between the activations of the i + 1 layer and the
             backpropagated error. The sensitivities are gradients of loss with 
-            respect to z in each layer, where z = wx + b is the value of a
-            particular layer before passing through the activation function.
+            respect to z in each layer, where z = theta(wx + b), where theta is
+            the activation function and z is the output of a particular layer.
         batch_size : int
             Size of minibatches.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Update the weights at each layer, based on the gradient
-        # of the error. Add an L2 regularization penalty term to the gradient
-        # with a lambda of 1.0 before using the gradient to update the weights.
+        # Instructions: Update the weights and biases at each layer, based on
+        # the gradient of the error. Add an L2 regularization penalty term to
+        # the gradient with a lambda term of 1.0 before using the gradient to
+        # update the weights and biases.
         # ================================================
 
     def fit(self, X, y):
