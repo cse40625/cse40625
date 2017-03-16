@@ -70,7 +70,7 @@ def label_binarize(y):
 
 
 def tanh(X):
-    """Compute the hyperbolic tangent (tanh) function inplace.
+    """Compute the hyperbolic tangent (tanh) function.
 
     Parameters
     ----------
@@ -103,7 +103,7 @@ def tanh_derivative(Z):
 
 
 def softmax(X):
-    """Compute the K-way softmax function inplace.
+    """Compute the K-way softmax function.
 
     Parameters
     ----------

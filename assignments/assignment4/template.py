@@ -70,7 +70,7 @@ def label_binarize(y):
 
 
 def softmax(X):
-    """Compute the K-way softmax function inplace.
+    """Compute the K-way softmax function.
 
     Parameters
     ----------
