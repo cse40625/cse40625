@@ -1,4 +1,4 @@
-#CSE 40625: Machine Learning (Spring 2017)
+# CSE 40625: Machine Learning (Spring 2017)
 
 Collection of resources for Notre Dame CSE Machine Learning course (CSE 40625).
 
