@@ -252,7 +252,7 @@ class SLNNClassifier(object):
             Output activations.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Update the weights at each layer.
+        # Instructions: Use the gradients to update the weights at each layer.
         # ================================================
 
     def fit(self, X, y):
