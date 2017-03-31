@@ -103,11 +103,10 @@ class SLNNClassifier(object):
     derivatives of the loss function with respect to the model parameters are
     computed. These gradients are then used to update the model parameters.
 
-    This implementation uses a logistic activation function and softmax output
-    transformation, and optimizes the multinomial logistic loss (also known as
-    the cross-entropy loss) using (minibatch) stochastic gradient descent. The
-    resulting model is equivalent to a neural network-based implementation of
-    multinomial logistic regression [2].
+    This implementation uses a softmax output transformation, and optimizes
+    the multinomial logistic loss (also known as the cross-entropy loss) using
+    (minibatch) stochastic gradient descent. The model is equivalent to a
+    neural network-based implementation of multinomial logistic regression [2].
 
     Parameters
     ----------
