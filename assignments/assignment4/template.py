@@ -228,7 +228,7 @@ class SLNNClassifier(object):
             Gradient of the error for the biases.
         """
         # ================ YOUR CODE HERE ================
-        # Instructions: Compute and return the gradient.
+        # Instructions: Compute and return the gradients.
         # ================================================
 
     def _update_weight(self, X, y, activations):
