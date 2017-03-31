@@ -208,7 +208,8 @@ class SLNNClassifier(object):
             E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(w_k.T \dot x_n)),
         which can be minimized by computing the gradient:
             grad = -\sum_N (x_n * (1 - P(Y=k|X=x_n, w)),
-        where P(Y=k|X=x_n, w) is the likelihood function.
+        where P(Y=k|X=x_n, w) is the likelihood function. The bias corresponds
+        to an input value of 1.
 
         Parameters
         ----------
@@ -221,9 +222,9 @@ class SLNNClassifier(object):
 
         Returns
         -------
-        weight_grad : array, shape = [n_weights,]
+        weight_grad : array, shape = [n_features, n_classes]
             Gradient of the error for the weights.
-        bias_grad : array, shape = [n_weights,]
+        bias_grad : array, shape = [1, n_classes]
             Gradient of the error for the biases.
         """
         # ================ YOUR CODE HERE ================
