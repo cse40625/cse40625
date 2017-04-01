@@ -365,18 +365,20 @@ class MLNNClassifier(object):
         # Instructions: Compute and return the gradient.
         # ================================================
 
-    def _update_weight(self, activations, deltas, batch_size):
-        """Updates the weight vector.
+    def _update_params(self, activations, deltas, batch_size):
+        """Updates the weights and biases.
 
         Given the learning rate and gradient of the error, the updated weight
-        vector w can be computed as:
-            w_i = w_i - learning_rate * grad,
-        where i is the ith layer. This adjusts the weight vector in the
+        vector w and bias b can be computed as:
+            w_i = w_i - learning_rate * w_grad
+            b_i = b_i - learning_rate * b_grad,
+        where i is the ith layer. This adjusts the weights and biases in the
         direction of negative error proportional to the learning rate.
 
-        L2 regularization is performed by adding a component to the gradient
-        that is proportional to (and in the negative direction of) the weights:
-            grad = grad + ((2 * lambda) / N) * w_i,
+        L2 regularization is performed by adding a term to the gradient that is
+        proportional to (and in the negative direction of) the parameters:
+            w_grad = w_grad + ((2 * lambda) / N) * w_i
+            b_grad = b_grad + ((2 * lambda) / N) * b_i,
         where lambda is a regularization parameter.
 
         Parameters

@@ -198,18 +198,19 @@ class SLNNClassifier(object):
         """Compute the gradient.
 
         Using the softmax activation as the output layer, our neural network
-        applies h(x) = (w_k.T \dot x_n) to compute the likelihood function:
-            P(Y=k|X=x_n, w) = \prod_N (exp(h(x)) / \sum_K exp(h(x))),
+        applies h(x) = (w_k.T \dot x_n + b) to compute the likelihood function:
+            P(Y=k|X=x_n, w, b) = \prod_N (exp(h(x)) / \sum_K exp(h(x))),
         where K is the number of target classes, N is the number of instances,
-        w are the weights, and the dot product is denoted by \dot.
+        w is the weight vector, b is the bias, and the dot product is denoted
+        by \dot.
 
         Using the softmax activation, the neural network minimizes the
         multinomial logistic error (also known as the cross-entropy error):
-            E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(w_k.T \dot x_n)),
+            E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(h(x))),
         which can be minimized by computing the gradient:
-            grad = -\sum_N (x_n * (1 - P(Y=k|X=x_n, w)),
-        where P(Y=k|X=x_n, w) is the likelihood function. The bias corresponds
-        to an input value of 1.
+            grad = -\sum_N (x_n * (1 - P(Y=k|X=x_n, w, b)),
+        where P(Y=k|X=x_n, w, b) is the likelihood function. The bias
+        corresponds to an input value of 1, and is minimized accordingly.
 
         Parameters
         ----------
@@ -231,17 +232,16 @@ class SLNNClassifier(object):
         # Instructions: Compute and return the gradients.
         # ================================================
 
-    def _update_weight(self, X, y, activations):
-        """Updates the weight vector.
+    def _update_params(self, X, y, activations):
+        """Updates the weights and biases.
 
         Given the learning rate and gradient of the error, the updated weight
-        vector w can be computed as:
-            w = w - learning_rate * grad.
-        This adjusts the weight vector in the direction of negative error
+        vector w and bias b can be computed as:
+            w = w - learning_rate * w_grad
+            b = b - learning_rate * b_grad.
+        This adjusts the weights and bias in the direction of negative error
         proportional to the learning rate.
 
-        Parameters
-        ----------
         Parameters
         ----------
         X : array, shape = [n_instances, n_features]
