@@ -173,12 +173,12 @@ class SLNNClassifier(object):
 
         The activations are initialized as input x_in. The activations of the
         output layer are computed as:
-            s = W.T \dot x_in
+            s = w.T \dot x_in
             x_out = theta(s + bias),
-        where x_in is the input activations, s is the dot product of the
-        weights and the input activations, and theta() is the output
-        transformation. The output hypothesis is h(x) = x_out. The dot product
-        is denoted by \dot.
+        where w is the weight vector, x_in is the input activations, s is the
+        dot product of the weights and the input activations, and theta() is
+        the output transformation. The output hypothesis is h(x) = x_out. The
+        dot product is denoted by \dot.
 
         Parameters
         ----------
@@ -195,10 +195,11 @@ class SLNNClassifier(object):
         # ================================================
 
     def _compute_gradient(self, X, y, activations):
-        """Compute the gradient.
+        """Compute the gradients.
 
-        Using the softmax activation as the output layer, our neural network
-        applies h(x) = (w_k.T \dot x_n + b) to compute the likelihood function:
+        Using the softmax function as the output transformation, the neural
+        network applies h(x) = ((w_k.T \dot x_n) + b_k) to compute the
+        likelihood function:
             P(Y=k|X=x_n, w, b) = \prod_N (exp(h(x)) / \sum_K exp(h(x))),
         where K is the number of target classes, N is the number of instances,
         w is the weight vector, b is the bias, and the dot product is denoted
@@ -223,9 +224,9 @@ class SLNNClassifier(object):
 
         Returns
         -------
-        weight_grad : array, shape = [n_features, n_classes]
+        w_grad : array, shape = [n_features, n_classes]
             Gradient of the error for the weights.
-        bias_grad : array, shape = [1, n_classes]
+        b_grad : array, shape = [1, n_classes]
             Gradient of the error for the biases.
         """
         # ================ YOUR CODE HERE ================

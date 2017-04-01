@@ -331,7 +331,7 @@ class MLNNClassifier(object):
         # ================================================
 
     def _compute_gradient(self, activations, deltas, batch_size):
-        """Compute the gradient.
+        """Compute the gradients.
 
         For each instance x_n (in the batch), the gradient is computed as:
             G_l(x_n) = [x_{l-1} \dot (delta_l).T]
@@ -356,9 +356,9 @@ class MLNNClassifier(object):
 
         Returns
         -------
-        weight_grad : array, shape = [n_weights,]
+        w_grad : array, shape = [n_weights,]
             Gradient of the error for the weights.
-        bias_grad : array, shape = [n_weights,]
+        b_grad : array, shape = [n_weights,]
             Gradient of the error for the biases.
         """
         # ================ YOUR CODE HERE ================
