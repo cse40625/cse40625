@@ -293,7 +293,7 @@ class SLNNClassifier(object):
         """Predict target values for instances in X.
 
         Using the softmax function as the output transformation, the output
-        hypothesis h(x) = argmax(k, P(Y=k|X=x_n, w, b)).
+        hypothesis h(x) = argmax_k P(Y=k|X=x_n, w, b).
 
         Parameters
         ----------
