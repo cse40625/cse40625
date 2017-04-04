@@ -177,8 +177,7 @@ class SLNNClassifier(object):
             x_out = theta(s + bias),
         where w is the weight vector, x_in is the input activations, s is the
         dot product of the weights and the input activations, and theta() is
-        the output transformation. The output hypothesis is h(x) = x_out. The
-        dot product is denoted by \dot.
+        the output transformation. The dot product is denoted by \dot.
 
         Parameters
         ----------
@@ -198,18 +197,18 @@ class SLNNClassifier(object):
         """Compute the gradients.
 
         Using the softmax function as the output transformation, the neural
-        network applies h(x) = ((w_k.T \dot x_n) + b_k) to compute the
+        network applies s(x) = ((w_k.T \dot x_n) + b_k) to compute the
         likelihood function:
-            P(Y=k|X=x_n, w, b) = \prod_N (exp(h(x)) / \sum_K exp(h(x))),
+            P(Y=k|X=x_n, w, b) = exp(s(x)) / \sum_K exp(s(x)),
         where K is the number of target classes, N is the number of instances,
         w is the weight vector, b is the bias, and the dot product is denoted
         by \dot.
 
         Using the softmax activation, the neural network minimizes the
         multinomial logistic error (also known as the cross-entropy error):
-            E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(h(x))),
+            E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(s(x)))),
         which can be minimized by computing the gradient:
-            grad = -\sum_N (x_n * (1 - P(Y=k|X=x_n, w, b)),
+            grad = -\sum_N (x_n * (1 - P(Y=k|X=x_n, w, b))),
         where P(Y=k|X=x_n, w, b) is the likelihood function. The bias
         corresponds to an input value of 1, and is minimized accordingly.
 
@@ -292,6 +291,9 @@ class SLNNClassifier(object):
 
     def predict(self, X):
         """Predict target values for instances in X.
+
+        Using the softmax function as the output transformation, the output
+        hypothesis h(x) = argmax(k, P(Y=k|X=x_n, w, b)).
 
         Parameters
         ----------
