@@ -186,7 +186,7 @@ class SLNNClassifier(object):
 
         Returns
         -------
-        outputs : array, shape = [n_instances, n_features]
+        outputs : array, shape = [n_instances, n_classes]
             Computed network outputs.
         """
         # ================ YOUR CODE HERE ================
@@ -218,7 +218,7 @@ class SLNNClassifier(object):
             Training data.
         y : array, shape = [n_instances, n_classes]
             Target values.
-        activations : array, shape = [n_instances, n_features]
+        activations : array, shape = [n_instances, n_classes]
             Output activations.
 
         Returns
@@ -248,7 +248,7 @@ class SLNNClassifier(object):
             Training data.
         y : array, shape = [n_instances, n_classes]
             Target values.
-        activations : array, shape = [n_instances, n_features]
+        activations : array, shape = [n_instances, n_classes]
             Output activations.
         """
         # ================ YOUR CODE HERE ================
