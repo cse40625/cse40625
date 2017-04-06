@@ -160,8 +160,8 @@ class SLNNClassifier(object):
         b : array, shape = [1, fan_out]
             Initialized biases.
         """
-        W = np.random.uniform(-.5, .5, (fan_in, fan_out))
-        b = np.random.uniform(-.5, .5, (1, fan_out))
+        W = np.random.uniform(0., 1., (fan_in, fan_out))
+        b = np.random.uniform(0., 1., (1, fan_out))
         self.weight_ = W
         self.bias_ = b
 
