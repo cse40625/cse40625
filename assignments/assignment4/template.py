@@ -197,18 +197,18 @@ class SLNNClassifier(object):
         """Compute the gradients.
 
         Using the softmax function as the output transformation, the neural
-        network applies s(x) = ((w_k.T \dot x_n) + b_k) to compute the
+        network applies s(x)_k = ((w_k.T \dot x) + b_k) to compute the
         likelihood function:
-            P(Y=k|X=x_n, w, b) = exp(s(x)) / \sum_K exp(s(x)),
+            P(Y=k|X=x_n, w, b) = exp(s(x_n)_k) / \sum_K exp(s(x_n)_k),
         where K is the number of target classes, N is the number of instances,
         w is the weight vector, b is the bias, and the dot product is denoted
         by \dot.
 
         Using the softmax activation, the neural network minimizes the
         multinomial logistic error (also known as the cross-entropy error):
-            E(w) = -\sum_N ((w_k.T \dot x_n) - log(\sum_K exp(s(x)))),
+            E(w_k) = -1/N \sum_N (s(x_n)_y - log(\sum_K exp(s(x_n)_k))),
         which can be minimized by computing the gradient:
-            grad = -\sum_N (x_n * (1 - P(Y=k|X=x_n, w, b))),
+            grad_k = -1/N \sum_N (x_n * (1 - P(Y=y_n|X=x_n, w, b))),
         where P(Y=k|X=x_n, w, b) is the likelihood function. The bias
         corresponds to an input value of 1, and is minimized accordingly.
 
