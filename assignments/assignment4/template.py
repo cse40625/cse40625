@@ -272,7 +272,7 @@ class SLNNClassifier(object):
         """
         np.random.seed(seed=self.random_state)
 
-        n_instances, n_features = X.shape
+        _, n_features = X.shape
 
         self.classes_ = np.unique(y)
         self.n_outputs_ = len(self.classes_)

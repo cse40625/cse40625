@@ -158,7 +158,7 @@ class Perceptron(object):
         y_pred : array, shape = [n_instances]
             Predicted target value for instances.
         """
-        n_instances, n_features = np.shape(X)
+        n_instances, _ = np.shape(X)
 
         # Insert bias term.
         bias = np.negative(np.ones(shape=(n_instances, 1)))
