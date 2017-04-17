@@ -272,13 +272,13 @@ class MLNNClassifier(object):
 
         Parameters
         ----------
-        activations : list, length = n_layers - 1
+        activations : list, length = n_layers
             Activations for each layer. The ith element of the list holds the
             values of the ith layer.
 
         Returns
         -------
-        activations : list, length = n_layers - 1
+        activations : list, length = n_layers
             Computed network activations.
         """
         # ================ YOUR CODE HERE ================
@@ -311,7 +311,7 @@ class MLNNClassifier(object):
         ----------
         y : array, shape = [n_instances, n_classes]
             Target values.
-        activations : list, length = n_layers - 1
+        activations : list, length = n_layers
             Activations for each layer. The ith element of the list holds the
             values of the ith layer.
         deltas : list, length = n_layers - 1
@@ -342,7 +342,7 @@ class MLNNClassifier(object):
 
         Parameters
         ----------
-        activations : list, length = n_layers - 1
+        activations : list, length = n_layers
             Activations for each layer. The ith element of the list holds the
             values of the ith layer.
         deltas : list, length = n_layers - 1
@@ -383,7 +383,7 @@ class MLNNClassifier(object):
 
         Parameters
         ----------
-        activations : list, length = n_layers - 1
+        activations : list, length = n_layers
             Activations for each layer. The ith element of the list holds the
             values of the ith layer.
         deltas : list, length = n_layers - 1
