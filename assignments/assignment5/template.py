@@ -300,12 +300,11 @@ class MLNNClassifier(object):
         where x_L is the activations at layer L and y is the target values.
 
         The sensitivities from layers l = L-1 to 1 are backpropagated as:
-            delta_l = 2 * theta'(s_l) \times [W_{l+1} \dot delta_{l+1}],
-        where s_l is the dot product of the weights at layer l and activations
-        at layer l-1, W_{l+1} is the weights at layer l+1, and theta'(s_l) is
-        the derivative of the hidden transformation applied to s_l.
-        Element-wise multiplication is denoted by \times and the dot product is
-        denoted by \dot.
+            delta_l = theta'(s_l) \times [W_{l+1} \dot delta_{l+1}],
+        where s_l is the input to layer l, W_{l+1} is the weights at layer l+1,
+        and theta'(s_l) is the derivative of the hidden transformation applied
+        to s_l. Element-wise multiplication is denoted by \times and the dot
+        product is denoted by \dot.
 
         Parameters
         ----------
