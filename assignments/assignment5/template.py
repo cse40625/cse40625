@@ -341,23 +341,18 @@ class MLNNClassifier(object):
 
         Parameters
         ----------
-        activations : list, length = n_layers
-            Activations for each layer. The ith element of the list holds the
-            values of the ith layer.
-        deltas : list, length = n_layers - 1
-            Sensitivities for each layer. The ith element of the list holds the
-            difference between the activations of the i + 1 layer and the
-            backpropagated error. The sensitivities are gradients of loss with 
-            respect to z in each layer, where z = theta(wx + b), where theta is
-            the activation function and z is the output of a particular layer.
+        activations : array, shape = [batch_size, layer_dim]
+            Activations for layer l-1.
+        deltas : array, shape = [batch_size, layer_dim]
+            Sensitivities for layer l.
         batch_size : int
             Size of minibatches.
 
         Returns
         -------
-        w_grad : array, shape = [n_weights,]
+        W_grad : array, shape = [batch_size, layer_dim]
             Gradient of the error for the weights.
-        b_grad : array, shape = [n_weights,]
+        b_grad : array, shape = [batch_size, layer_dim]
             Gradient of the error for the biases.
         """
         # ================ YOUR CODE HERE ================
