@@ -8,7 +8,7 @@ def make_dataset():
     digits = load_digits(n_class=2)
     df = pd.DataFrame(np.column_stack((digits.data, digits.target)))
     df = df.rename(columns={64: 'Class'})
-    df.ix[df.ix[:, -1] == 0, -1] = -1
+    df.loc[df.loc[:, 'Class'] == 0, 'Class'] = -1
     df.to_csv('digits_binary.csv', index=False)
 
 

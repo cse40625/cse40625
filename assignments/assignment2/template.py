@@ -186,8 +186,8 @@ class LogisticRegression(object):
 if __name__ == "__main__":
     with open('output.txt', 'w') as f_out:
         df = pd.read_csv('digits_binary.csv')
-        X = df.ix[:, :-1]
-        y = df.ix[:, -1]
+        X = df.iloc[:, :-1]
+        y = df.iloc[:, -1]
 
         clf = LogisticRegression(random_state=0)
         clf.fit(X, y)

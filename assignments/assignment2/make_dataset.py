@@ -10,9 +10,9 @@ def make_dataset():
     df_test = pd.read_csv(test, header=None)
     df = pd.concat([df_train, df_test], axis=0)
     df = df.rename(columns={64: 'Class'})
-    df = df.ix[(df.ix[:, -1] == 1) | (df.ix[:, -1] == 5)]
-    df.ix[df.ix[:, -1] == 1, -1] = -1
-    df.ix[df.ix[:, -1] == 5, -1] = 1
+    df = df.loc[(df.loc[:, 'Class'] == 1) | (df.loc[:, 'Class'] == 5)]
+    df.loc[df.loc[:, 'Class'] == 1, 'Class'] = -1
+    df.loc[df.loc[:, 'Class'] == 5, 'Class'] = 1
     df.to_csv('digits_binary.csv', index=False)
 
 if __name__ == "__main__":

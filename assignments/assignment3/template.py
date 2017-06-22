@@ -175,8 +175,8 @@ class GaussianNB(object):
 if __name__ == "__main__":
     with open('output.txt', 'w') as f_out:
         df = pd.read_csv('digits.csv')
-        X = df.ix[:, :-1]
-        y = df.ix[:, -1]
+        X = df.iloc[:, :-1]
+        y = df.iloc[:, -1]
 
         clf = GaussianNB()
         clf.fit(X, y)

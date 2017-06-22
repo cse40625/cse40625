@@ -89,8 +89,8 @@ if __name__ == "__main__":
     reg_lambda = 1.0
 
     df = pd.read_csv('digits.csv')
-    X = df.ix[:, :-1]
-    y = df.ix[:, -1]
+    X = df.iloc[:, :-1]
+    y = df.iloc[:, -1]
 
     clf = MLNNClassifier(max_iter=max_iter)
     clf.fit(X, y)
